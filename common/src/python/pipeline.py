@@ -1,0 +1,25 @@
+from typing import Literal
+
+
+def get_project(fw: Client,
+                group_id: str, datatype: Literal['form','dicom'] = 'form', 
+                pipeline_type: Literal['ingest', 'sandbox'] = 'sandbox', 
+                study_id: str = 'uds'):
+    """
+    Looks up the project for a given center, study, and datatype.
+    
+    Args:
+        group_id (str): The group ID of the center.
+        datatype (str): The datatype to look up.
+        pipeline_type (str): The type of the pipeline.
+        study_id (str): The study ID for the project.
+    Returns:
+        Project: The project for the given center, study, and datatype.
+    """
+    suffix = f"-{study_id}" if study_id != 'uds' else ''
+    project_label = f"{pipeline_type}-{datatype}{suffix}"
+    project = fw.lookup(f"{group_id}/{project_label}")
+    if not project:
+        log.error("Failed to find project %s", project_label)
+
+    return project

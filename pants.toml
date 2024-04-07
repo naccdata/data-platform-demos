@@ -1,0 +1,58 @@
+[GLOBAL]
+pants_version = "2.19.2"
+backend_packages = [
+    "pants.backend.build_files.fmt.yapf",
+    "pants.backend.docker",
+    "pants.backend.docker.lint.hadolint",
+    "pants.backend.python",
+    "pants.backend.python.lint.autoflake",
+    "pants.backend.python.lint.bandit",
+    "pants.backend.python.lint.docformatter",
+    "pants.backend.python.lint.flake8",
+    "pants.backend.python.lint.isort",
+    "pants.backend.python.lint.pydocstyle",
+    "pants.backend.python.lint.pylint",
+    "pants.backend.python.lint.pyupgrade",
+    "pants.backend.python.lint.yapf",
+    "pants.backend.python.typecheck.mypy",
+    "pants.backend.docker",
+    "pants.backend.docker.lint.hadolint",
+    "pants.backend.shell"
+]
+pants_ignore = [
+    '.devcontainer/**',
+    '.vscode/**'
+]
+
+[source]
+root_patterns = [
+    "src/*", "test/*"
+]
+
+[docker]
+default_repository = "naccdata/{name}"
+
+[python]
+interpreter_constraints = ["==3.12.*"]
+enable_resolves = true
+resolves = { python-default = "python-default.lock"}
+
+[python-bootstrap]
+#  https://www.pantsbuild.org/docs/python-interpreter-compatibility#changing-the-interpreter-search-path.
+search_path = ["<PATH>", "<PYENV>"]
+
+[python-infer]
+use_rust_parser = true
+
+[update-build-files]
+formatter="yapf"
+
+[bandit]
+args = ["--quiet"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.black]
+line-length = 100
