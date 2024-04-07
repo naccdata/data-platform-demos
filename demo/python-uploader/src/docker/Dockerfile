@@ -5,19 +5,21 @@ FROM python:3.11 as demo-base
 ENV SCRIPT_DIR=/script
 WORKDIR ${SCRIPT_DIR}
 
-# install dependencies
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+# # install dependencies
+# COPY requirements.txt .
+# RUN pip3 install --no-cache-dir -r requirements.txt
 
-# copy script into container
-COPY ./uploader .
+# # copy script into container
+# COPY ./uploader .
+
+COPY demo.python-uploader.src.python.uploader/bin.pex /bin/run
 
 # create working directory to be mounted as working directory
 RUN mkdir /wd
 WORKDIR /wd
 
 # run script by default
-ENTRYPOINT [ "python3", "/script/uploader.py" ]
+ENTRYPOINT [ "python3", "/bin/run" ]
 
 # NOTE: to run a shell in the container, you have to override the entrypoint
 # at the command line:
