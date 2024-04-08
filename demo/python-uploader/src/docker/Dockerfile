@@ -1,24 +1,18 @@
 FROM python:3.11 as demo-base
 
-# create directories within container
+# 1. Create a directories within container for the script
 # /script is where the package lives
 ENV SCRIPT_DIR=/script
 WORKDIR ${SCRIPT_DIR}
 
-# # install dependencies
-# COPY requirements.txt .
-# RUN pip3 install --no-cache-dir -r requirements.txt
-
-# # copy script into container
-# COPY ./uploader .
-
+# 2. Copy the Pex file for the uploader.
 COPY demo.python-uploader.src.python.uploader/bin.pex /bin/run
 
-# create working directory to be mounted as working directory
+# 3. Create working directory to be mounted as working directory
 RUN mkdir /wd
 WORKDIR /wd
 
-# run script by default
+# 4. Set the the Pex file to be run by default
 ENTRYPOINT [ "python3", "/bin/run" ]
 
 # NOTE: to run a shell in the container, you have to override the entrypoint
