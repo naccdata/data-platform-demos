@@ -1,13 +1,19 @@
+"""Implements utilities for data pipelines in NACC Data Platform."""
+import logging
 from typing import Literal
 
+from flywheel import Client
 
-def get_project(fw: Client,
-                group_id: str, datatype: Literal['form','dicom'] = 'form', 
-                pipeline_type: Literal['ingest', 'sandbox'] = 'sandbox', 
+log = logging.getLogger('__main__')
+
+
+def get_project(client: Client,
+                group_id: str,
+                datatype: Literal['form', 'dicom'] = 'form',
+                pipeline_type: Literal['ingest', 'sandbox'] = 'sandbox',
                 study_id: str = 'uds'):
-    """
-    Looks up the project for a given center, study, and datatype.
-    
+    """Look up the project for a given center, study, and datatype.
+
     Args:
         group_id (str): The group ID of the center.
         datatype (str): The datatype to look up.
@@ -18,7 +24,7 @@ def get_project(fw: Client,
     """
     suffix = f"-{study_id}" if study_id != 'uds' else ''
     project_label = f"{pipeline_type}-{datatype}{suffix}"
-    project = fw.lookup(f"{group_id}/{project_label}")
+    project = client.lookup(f"{group_id}/{project_label}")
     if not project:
         log.error("Failed to find project %s", project_label)
 
