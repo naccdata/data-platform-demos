@@ -116,3 +116,29 @@ docker run --volume "./data":/wd --env-file .env naccdata/r-uploader
 Note this uploads the file `data/form-data.csv`.
 The argument `--volume "./data":/wd` indicates to Docker that you want `/wd` within the container to reference the `data` directory.
 The script is hard coded to read only the `form-data.csv` file from that directory, but you could change it to upload any files it finds there.
+
+## CLI uploader
+
+The CLI uploader is defined in the directory `demo/fwcli-uploader`.
+
+This example uses a Docker image to illustrate deploying a shell script using the FW CLI to upload a file from disk. 
+You can use the CLI as a command, but this shows how the CLI could be used in a production setting.
+
+The Python script is in the directory `demo/fwcli-uploader/src/python/uploader`.
+The Dockerfile is in the directory `demo/fwcli-uploader/src/docker`
+See the comments in the `uploader.py` and `Dockerfile` in these directories for more details.
+
+### Running Demo
+
+To run this example, first build the Docker image with
+```bash
+pants package demo/fwcli-uploader/src/docker::
+```
+
+And, then run the example using the command
+```bash
+docker run --volume ./data:/wd --env-file .env naccdata/cli-uploader
+```
+Note this uploads the file `data/form-data.csv`.
+The argument `--volume ./data:/wd` indicates to Docker that you want `/wd` within the container to reference the `data` directory.
+The script is hard coded to read only the `form-data.csv` file from that directory, but you could change it to upload any files it finds there.
