@@ -13,7 +13,7 @@ log = logging.getLogger('__main__')
 
 
 def main():
-    """Upload a file to the NADD Data Platform.
+    """Upload a file to the NACC Data Platform.
 
     Uses Flywheel instance determined by the API key value set in
     FW_API_KEY.
@@ -31,7 +31,7 @@ def main():
 
     # 3. Get the Flywheel group ID for the center by the ADCID.
     #    This hardcodes the NACC Sample Center, and will have to be changed
-    group_id = get_center_id(client=client, adcid=0)
+    group_id = get_center_id(client=client, adcid='0')
     log.info("Group ID for ADCID 0 is %s", group_id)
 
     # 4. Get the form sandbox pipeline project
