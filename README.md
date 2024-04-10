@@ -3,7 +3,7 @@
 Demo code for uploading form data to the NACC Data Platform.
 
 > Note: these projects demonstrate using the Flywheel SDK to connect to the Flywheel instance using code that uploads a file from disk.
-> If you plan to upload files this way, you don't need to write your own code, and can instead use the [Flywheel CLI utility](https://flywheel-io.gitlab.io/tools/app/cli/fw-beta/)
+> If you plan to upload files this way, you don't need to write your own code, and can instead use the [Flywheel CLI utility](https://docs.flywheel.io/CLI_Command_Guides/)
 
 
 ## Setting up demo environment
@@ -57,6 +57,7 @@ The Python uploader is defined in the directory `demo/python-uploader`.
 This example uses a Docker image to illustrate deploying a Python script to upload a file from disk. As mentioned above, if this is your scenario, you should consider using the Flywheel CLI instead of writing your own script.
 
 The Python script is in the directory `demo/python-uploader/src/python/uploader`.
+It uses helper functions defined in `common/src/python`.
 The Dockerfile is in the directory `demo/python-uploader/src/docker`
 See the comments in the `uploader.py` and `Dockerfile` in these directories for more details.
 
@@ -88,3 +89,30 @@ file_spec = FileSpec(filename, contents=contents, content_type=file_type)
 if upload_project:
     upload_project.upload_file(file_spec)
 ```
+
+## R uploader
+
+The R uploader is defined in the directory `demo/r-uploader`.
+
+This example uses a Docker image to illustrate deploying a R script calling Python to upload a file from disk. 
+As mentioned above, if uploading from disk is your scenario, you should consider using the Flywheel CLI instead of writing your own script.
+
+The R script is in the directory `demo/python-uploader/src/python/uploader`.
+It uses the Reticulate package to call functions in the Flywheel-SDK and helper functions in `common/src/python`.
+The Dockerfile is in the directory `demo/python-uploader/src/docker`
+See the comments in the `uploader.R` and `Dockerfile` in these directories for more details.
+
+### Running Demo
+
+To run this example, first build the Docker image with
+```bash
+pants package demo/r-uploader/src/docker::
+```
+
+And, then run the example using the command
+```bash
+docker run --volume "./data":/wd --env-file .env naccdata/r-uploader
+```
+Note this uploads the file `data/form-data.csv`.
+The argument `--volume "./data":/wd` indicates to Docker that you want `/wd` within the container to reference the `data` directory.
+The script is hard coded to read only the `form-data.csv` file from that directory, but you could change it to upload any files it finds there.
