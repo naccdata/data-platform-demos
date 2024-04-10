@@ -8,6 +8,6 @@ else
     echo "Skipping generation of lock file"
 fi
 
-pants export --py-resolve-format=symlinked_immutable_virtualenv --resolve=python-default
+pants --keep-sandboxes=on_failure export --py-resolve-format=symlinked_immutable_virtualenv --resolve=python-default 
 
 ln -snf dist/export/python/virtualenvs/python-default /workspaces/form-upload-demo/venv
