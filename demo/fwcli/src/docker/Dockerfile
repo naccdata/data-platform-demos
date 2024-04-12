@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM python:3.11
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
@@ -22,6 +22,9 @@ RUN curl -o fw.zip https://storage.googleapis.com/flywheel-dist/cli/17.8.2/fw-li
  && unzip fw.zip \
  && mv linux_amd64 bin \
  && chmod +x entrypoint.sh
+
+COPY demo.fwcli.src.python.center_script/bin.pex ./bin/center_lookup
+COPY demo.fwcli.src.python.pipeline_script/bin.pex ./bin/pipeline_lookup
 
 ENV PATH="${PATH}:${SCRIPT_DIR}/bin"
 

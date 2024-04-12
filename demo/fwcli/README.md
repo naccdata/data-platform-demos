@@ -2,27 +2,31 @@
 
 ## Setting the center and pipeline in the entrypoint script
 
-Before you can run this demo, you need to set the variables `CENTER` and `PIPELINE` in the script `demo/fwcli/src/docker/entrypoint.sh`.
+Before you can run this demo, you need to make a couple of changes in the file `demo/fwcli/src/docker/entrypoint.sh`.
 
-### To determine the value of `CENTER`:
+### To set the center
 
-1. Login to naccdata.flywheel.org.
-2. On the Projects page, type `nacc` into the `Group` field.
-3. Click on the NACC `metadata` project.
-4. Click on the `Information` tab
-5. Under custom centers click the `^` button next to `centers`
-6. You should now see a list of NACC assigned ADCIDs. Find yours and click the corresponding `^` button.
-7. Edit the entrypoint script, and set `CENTER` to the value listed for `group`.
+In the line
 
-A slightly quicker way, is to select a project for your center on the Projects page. 
-Then look for a reference of the form `fw://<center-name>/<project-name>` at the top of the page, and use the `<center-name>` in the script.
+```bash
+CENTER=`center_lookup 0`
+```
 
-### To determine the value for `PIPELINE`:
+change the value `0` to the ADCID for your center.
 
-1. For practice submissions of form data, use `sandbox-form`.
-2. For practice submissions of enrollment (aka, NACCID) form data, use `sandbox-enrollment`.
+### To set the pipeline
 
-For submission of actual data, replace `sandbox` with `ingest` in the pipeline name.
+The line
+
+```bash
+PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox`
+```
+
+sets the pipeline name to `sandbox-form` after confirming the pipeline project exists for your center.
+In fact, you can remove the arguments following the center to get this using the defaults.
+To submit enrollment form data instead, change `-d form` to `-d enrollment`.
+
+> To submit actual data, change `-p sandbox` to `-p ingest`.
 
 ## Running the demo
 
@@ -32,7 +36,7 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 
 1. First, build the Docker image with
 ```bash
-pants package demo/fwcli-uploader/src/docker::
+pants package demo/fwcli/src/docker::
 ```
 
 2. Second, run the example using the command
