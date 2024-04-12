@@ -1,10 +1,11 @@
-# Form Upload Demo Code
+# Form Upload Demonstration Code
 
-Demo code for uploading form data to the NACC Data Platform.
+Demonstration code for uploading form data to the NACC Data Platform.
 
-> Note: these projects demonstrate using the Flywheel SDK to connect to the Flywheel instance using code that uploads a file from disk.
-> If you plan to upload files this way, you don't need to write your own code, and can instead use the [Flywheel CLI utility](https://docs.flywheel.io/CLI_Command_Guides/)
+These projects demonstrate using the Flywheel SDK or the Flywheel CLI tool to connect to the Flywheel instance using code that uploads a file from disk.
 
+Keep reading here for details on running the demonstrations.
+See the [documenation](https://naccdata.github.io/form-upload-demo) for general guidance on options.
 
 ## Setting up demo environment
 
@@ -56,10 +57,7 @@ The Python uploader is defined in the directory `demo/python-uploader`.
 
 This example uses a Docker image to illustrate deploying a Python script to upload a file from disk. As mentioned above, if this is your scenario, you should consider using the Flywheel CLI instead of writing your own script.
 
-The Python script is in the directory `demo/python-uploader/src/python/uploader`.
-It uses helper functions defined in `common/src/python`.
-The Dockerfile is in the directory `demo/python-uploader/src/docker`
-See the comments in the `uploader.py` and `Dockerfile` in these directories for more details.
+Details on this example are given in [`demo/python-uploader/README.md`](demo/python-uploader/README.md).
 
 
 ## R uploader
@@ -69,10 +67,7 @@ The R uploader is defined in the directory `demo/r-uploader`.
 This example uses a Docker image to illustrate deploying a R script calling Python to upload a file from disk. 
 As mentioned above, if uploading from disk is your scenario, you should consider using the Flywheel CLI instead of writing your own script.
 
-The R script is in the directory `demo/python-uploader/src/python/uploader`.
-It uses the Reticulate package to call functions in the Flywheel-SDK and helper functions in `common/src/python`.
-The Dockerfile is in the directory `demo/python-uploader/src/docker`
-See the comments in the `uploader.R` and `Dockerfile` in these directories for more details.
+Details on this example are given in [`demo/r-uploader/README.md`](demo/r-uploader/README.md).
 
 
 ## CLI uploader
@@ -82,8 +77,6 @@ The CLI uploader is defined in the directory `demo/fwcli-uploader`.
 This example uses a Docker image to illustrate deploying a shell script using the FW CLI to upload a file from disk. 
 You can use the CLI as a command, but this shows how the CLI could be used in a production setting.
 
-The Python script is in the directory `demo/fwcli-uploader/src/python/uploader`.
-The Dockerfile is in the directory `demo/fwcli-uploader/src/docker`
-See the comments in the `uploader.py` and `Dockerfile` in these directories for more details.
+Details for running this example are given in [`demo/fwcli/README.md`](demo/fwcli/README.md).
 
 
