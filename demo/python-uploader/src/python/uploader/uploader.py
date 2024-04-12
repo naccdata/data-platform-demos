@@ -47,7 +47,7 @@ def main():
     # 5. Upload the file.
     #    This script assumes it is run in an environment with a directory /wd,
     #    which is set within the Dockerfile.
-    filename = "form-data.csv"
+    filename = "form-data-dummyv1.csv"
     file_path = f"/wd/{filename}"
 
     if not os.path.exists(file_path):

@@ -45,8 +45,8 @@ pants package demo/python-uploader/src/docker::
 docker run --volume "./data":/wd --env-file .env naccdata/python-uploader
 ```
 
-Note this uploads the file `data/form-data.csv`.
+Note this uploads the file `data/form-data-dummyv1.csv`.
 
 The argument `--volume "./data":/wd` indicates to Docker that you want `/wd` within the container to reference the `data` directory.
-The script is hard-coded to read only the `form-data.csv` file from that directory, but you could change it to upload any files it finds there.
+The script is hard-coded to read only the `form-data-dummyv1.csv` file from that directory, but you could change it to upload any files it finds there.
 

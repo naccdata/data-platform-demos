@@ -22,7 +22,7 @@ upload_project <- tryCatch(
 
 message(sprintf("Using project %s/%s", upload_project$group, upload_project$label))
 
-filename <- "form-data.csv"
+filename <- "form-data-dummyv1.csv"
 file_path = sprintf("/wd/%s", filename)
 
 if(!file.exists(file_path)){

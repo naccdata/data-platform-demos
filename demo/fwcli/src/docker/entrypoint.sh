@@ -21,4 +21,4 @@ else
 fi
 
 # 2. Upload single file
-fw upload /wd/form-data.csv fw://${CENTER}/${PIPELINE}
+fw upload /wd/form-data-dummyv1.csv fw://${CENTER}/${PIPELINE}
