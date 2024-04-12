@@ -9,11 +9,8 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
 
 ## Setting up demo environment
 
-1. This repo is setup to be run within a VSCode devcontainer with Python 3.11 and Docker.
-   To use this environment, install VSCode, enable dev containers, and open the repository as a container.
-
-   If you choose not to run in this environment, you will need to make sure Python and Docker are set up within your environment.
-
+1. You will need [Docker](https://www.docker.com) installed to run the demo examples.
+   
 2. The repo also uses the [Pants build system](pantsbuild.org).
    Pants is used because it makes managing dependencies easier.
 
@@ -22,6 +19,9 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
    ```bash
    bash get-path.sh
    ```
+
+3. This repo is setup to be run within a VSCode devcontainer with Python 3.11 and Docker for development purposes.
+   It is not necessary to run this environment, but if you want to install VSCode, enable dev containers, and open the repository as a container.
 
 ## API key
 
@@ -53,7 +53,11 @@ Run the command
 touch .env
 ```
 
-and then edit the file to add your key.
+and then edit the file to add your key in a line like
+
+```bash
+FW_API_KEY=<the value of the API key>
+```
 
 ## Python uploader
 
