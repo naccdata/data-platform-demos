@@ -12,12 +12,16 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
 1. This repo is setup to be run within a VSCode devcontainer with Python 3.11 and Docker.
    To use this environment, install VSCode, enable dev containers, and open the repository as a container.
 
-   If you choose not to run in this environment, you will need to make sure these are set up within your environment.
+   If you choose not to run in this environment, you will need to make sure Python and Docker are set up within your environment.
 
 2. The repo also uses the [Pants build system](pantsbuild.org).
    Pants is used because it makes managing dependencies easier.
 
-   To install pants, run the script `bash get-path.sh`
+   To install pants, run the command
+   
+   ```bash
+   bash get-path.sh
+   ```
 
 ## API key
 
