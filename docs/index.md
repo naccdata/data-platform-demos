@@ -6,24 +6,17 @@ Purpose: This documentation describes the demonstrated options for programmatica
 
 There are two options to upload data to the Flywheel instance on which is the NACC Data Platform is built.
 One is to use the [Flywheel Python SDK](https://flywheel-io.gitlab.io/product/backend/sdk/index.html), and the other is to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI_Command_Guides/).
+Both are demonstrated.
 
-If you are writing a file to disk before the upload, the simplest strategy may be to use the CLI tool to do the upload.
-Otherwise, if you are building the upload into a system and want to write files created internally, the Python SDK is available.
+## About the examples.
 
-We provide three examples for demonstration:
+We demonstrate both strategies for uploads using three examples in the [GitHub repository](https://github.com/naccdata/form-upload-demo):
 
 1. Using the Python SDK from a Python script.
 2. Using the Python SDK from an R script.
 3. Using the CLI from a bash script.
 
-Each example is provided with the ability to build and run a [Docker](https://www.docker.com) container.
-Using Docker allows us to define the expected computational environment, and could be used as the basis for deploying scripts.
-
-The configuration and code for these are available in this [GitHub repository](https://github.com/naccdata/form-upload-demo).
-
-## Variations on a theme
-
-Each of the approaches follow these basic steps:
+Each of the examples follow these basic steps:
 
 1. Create a Flywheel client connection with your API Key
 2. Determine the group name for your center
@@ -32,16 +25,46 @@ Each of the approaches follow these basic steps:
 
 And, each requires you to make a few changes before you run the code.
 
-## Alternative Implementations
+Each example is provided with the ability to build and run a [Docker](https://www.docker.com) container.
+Using Docker allows us to define the expected computational environment, and could be used as the basis for deploying scripts.
 
-As mentioned a couple of times, if you want to transfer a file from disk you can just use the Flywheel CLI.
-However, if you instead generate the file contents in memory, you can upload the file by creating a `flywheel.FileSpec` object that references the contents and then using that to upload the file.
+## Which option should you use?
 
-Assuming file contents are in a variable `contents`, the code to upload this data is
+The CLI tool is software that provides alternatives for transferring data into Flywheel, and is already built and tested.
+But it only works if you have files to transfer.
+So, if you are writing files to disk (or to cloud storage), the CLI is the better alternative.
+This is also a good strategy for initial pilots.
+
+If on the other hand, you are creating a file in memory and then uploading, then using the SDK makes more sense.
+An example scenario is having an uploader script that pulls form data as a report from REDCap, which builds the CSV in memory, and then uploads this directly.
+
+## Alternative implementations
+
+All of the examples show transferring a single hard-coded file from disk.
+
+### All the files
+
+A simple alternative is to transfer all the files in the `data` directory.
+In each case, the change would be to iterate over all of the files in the directory and upload each separately.
+
+Since we expect files to have the "module" name as the file suffix, it would be a good idea to only upload files that end with the expected suffix (an example would be `data-export-20240412-udsv4.csv`)
+
+### "In memory" data
+
+The Flywheel SDK code for uploading data stored in memory is slightly different than in the example.
+In this case, you upload the file by creating a `flywheel.FileSpec` object that references the contents and then using that to upload the file.
+
+If the file contents are in a variable `contents`, then the Python code to upload this data is
+
 ```python
-filename = "form-data.csv"
-file_type = 'text/csv'
-file_spec = FileSpec(filename, contents=contents, content_type=file_type)
-if upload_project:
-    upload_project.upload_file(file_spec)
+file_spec = FileSpec(filename, contents=contents, content_type='text/csv')
+upload_project.upload_file(file_spec)
 ```
+
+And, the R code is
+
+```R
+file_spec <- flywheel$FileSpec(filename, contents=contents,content_type='text/csv')
+upload_project$upload_file(file_spec)
+```
+
