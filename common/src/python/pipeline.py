@@ -9,7 +9,7 @@ log = logging.getLogger('__main__')
 
 def get_project(client: Client,
                 group_id: str,
-                datatype: Literal['form', 'dicom'] = 'form',
+                datatype: Literal['form', 'enrollment', 'dicom'] = 'form',
                 pipeline_type: Literal['ingest', 'sandbox'] = 'sandbox',
                 study_id: str = 'uds'):
     """Look up the project for a given center, study, and datatype.
