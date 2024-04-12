@@ -9,19 +9,29 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
 
 ## Setting up demo environment
 
-1. You will need [Docker](https://www.docker.com) installed to run the demo examples.
-   
-2. The repo also uses the [Pants build system](pantsbuild.org).
+1. Install [Docker](https://www.docker.com) installed to run the demo examples.
+
+2. We recommend running the demo within a VSCode devcontainer to avoid dependency issues.
+   This repo setup to be run within a devcontainer with Python 3.11 and Docker.
+   You'll need [VSCode](https://code.visualstudio.com) with Dev Containers enabled.
+   For this follow the [Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial) to the point of "Check Installation".
+
+   Technically this is not necessary, but the repo is configured to support the demos and can avoid issues.
+
+3. With the devcontainer running, open a terminal pane in VSCode using the key combination ctrl-\`.  
+   (The key for \` is usually immediately to the left of the 1 key on a US Keyboard.)
+
+4. The repo also uses the [Pants build system](pantsbuild.org).
    Pants is used because it makes managing dependencies easier.
 
    To install pants, run the command
-   
+
    ```bash
-   bash get-path.sh
+   bash get-pants.sh
    ```
 
-3. This repo is setup to be run within a VSCode devcontainer with Python 3.11 and Docker for development purposes.
-   It is not necessary to run this environment, but if you want to install VSCode, enable dev containers, and open the repository as a container.
+   The full installation will occur the first time you run a pants command.
+
 
 ## API key
 
@@ -58,6 +68,8 @@ and then edit the file to add your key in a line like
 ```bash
 FW_API_KEY=<the value of the API key>
 ```
+
+> The `.env` file is included in the `.gitignore` file intentionally to prevent inclusion of the API token in a Git repository.
 
 ## Python uploader
 

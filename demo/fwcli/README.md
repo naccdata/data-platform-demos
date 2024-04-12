@@ -35,14 +35,17 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 > All the commands need to be run with the top-level directory of the repository as the working directory.
 
 1. First, build the Docker image with
+
 ```bash
 pants package demo/fwcli/src/docker::
 ```
 
-2. Second, run the example using the command
+1. Second, run the example using the command
+
 ```bash
 docker run --volume ./data:/wd --env-file .env naccdata/cli-uploader
 ```
+
 Note this uploads the file `data/form-data-dummyv1.csv`.
 The argument `--volume ./data:/wd` indicates to Docker that you want `/wd` within the container to reference the `data` directory.
 
