@@ -28,6 +28,9 @@ def main():
     # 2. Create the Client object using the API key.
     #    The key determines which instance you are using.
     client = Client(os.environ['FW_API_KEY'])
+    if not client:
+        log.error("not connected to Flywheel")
+        sys.exit(1)
 
     # 3. Get the Flywheel group ID for the center by the ADCID.
     #    This hardcodes the NACC Sample Center, and will have to be changed
