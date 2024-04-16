@@ -9,7 +9,7 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
 
 ## Setting up demo environment
 
-1. Install [Docker](https://www.docker.com) installed to run the demo examples.
+1. Install [Docker](https://www.docker.com) to run the demo examples.
 
 2. We recommend running the demo within a VSCode devcontainer to avoid dependency issues.
    This repo setup to be run within a devcontainer with Python 3.11 and Docker.
