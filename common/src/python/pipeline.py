@@ -11,7 +11,7 @@ def get_project(client: Client,
                 group_id: str,
                 datatype: Literal['form', 'enrollment', 'dicom'] = 'form',
                 pipeline_type: Literal['ingest', 'sandbox'] = 'sandbox',
-                study_id: str = 'uds'):
+                study_id: str = 'adrc'):
     """Look up the project for a given center, study, and datatype.
 
     Args:
@@ -22,7 +22,7 @@ def get_project(client: Client,
     Returns:
         Project: The project for the given center, study, and datatype.
     """
-    suffix = f"-{study_id}" if study_id != 'uds' else ''
+    suffix = f"-{study_id}" if study_id != 'adrc' else ''
     project_label = f"{pipeline_type}-{datatype}{suffix}"
     project = client.lookup(f"{group_id}/{project_label}")
     if not project:

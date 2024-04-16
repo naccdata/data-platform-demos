@@ -29,8 +29,8 @@ def main():
                         default='sandbox')
     parser.add_argument('-s',
                         '--studyid',
-                        help='the study ID (default: uds)',
-                        default='uds')
+                        help='the study ID (default: adrc)',
+                        default='adrc')
     args = parser.parse_args()
 
     if 'FW_API_KEY' not in os.environ:
