@@ -26,7 +26,7 @@ fi
 echo "Using center: ${CENTER}"
 
 # 3. Determine pipeline
-if ! PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox`; then
+if ! PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox -s adrc`; then
     echo "ERROR: pipeline lookup failed"
     exit 1
 fi

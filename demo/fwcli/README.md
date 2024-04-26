@@ -19,7 +19,7 @@ change the value `0` to the ADCID for your center.
 The line
 
 ```bash
-PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox`
+PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox -s adrc`
 ```
 
 sets the pipeline name to `sandbox-form` after confirming the pipeline project exists for your center.

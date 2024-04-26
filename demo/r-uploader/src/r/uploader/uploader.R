@@ -15,7 +15,7 @@ message(sprintf("Group ID for ADCID %s is %s", adcid, group_id))
 
 pipeline <- import("pipeline")
 upload_project <- tryCatch(
-    pipeline$get_project(client=client, group_id=group_id),
+    pipeline$get_project(client=client, group_id=group_id, datatype='form', pipeline_type='sandbox', study_id='adrc'),
     error = function(e){
         stop('ERROR:', e)
     })

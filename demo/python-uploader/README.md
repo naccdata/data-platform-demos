@@ -17,17 +17,16 @@ change the argument `adcid` to the ADCID for your center.
 
 ### To set the pipeline
 
-The line 
+The line
 
 ```python
 upload_project = get_project(client=client, group_id=group_id)
 ```
 
-uses defaults to get the `sandbox-form` pipeline as the upload destination.
-To submit enrollment form data instead, add the argument `datatype='enrollment'` in the parenthesis.
+gets the `sandbox-form` pipeline as the upload destination.
+To submit enrollment form data instead, set the datatype argument `datatype='enrollment'` in the parenthesis.
 
-> To submit actual data, add the argument `pipeline_type='ingest'`.
-
+> To submit actual data, set the pipeline argument `pipeline_type='ingest'`.
 
 ## Running Demo
 
@@ -36,11 +35,13 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 > All the commands need to be run with the top-level directory of the repository as the working directory.
 
 1. First, build the Docker image with
+
 ```bash
 pants package demo/python-uploader/src/docker::
 ```
 
-2. Second, run the example using the command
+1. Second, run the example using the command
+
 ```bash
 docker run --volume "./data":/wd --env-file .env naccdata/python-uploader
 ```
