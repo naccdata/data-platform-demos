@@ -4,17 +4,17 @@ Purpose: This documentation describes the demonstrated options for programmatica
 
 ## Programmatic Upload Options
 
-There are two options to upload data to the Flywheel instance on which is the NACC Data Platform is built.
+There are two options to upload data to the Flywheel instance on which the NACC Data Platform is built.
 One is to use the [Flywheel Python SDK](https://flywheel-io.gitlab.io/product/backend/sdk/index.html), and the other is to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI_Command_Guides/).
 Both are demonstrated.
 
-## About the examples.
+## About the examples
 
 We demonstrate both strategies for uploads using three examples in the [GitHub repository](https://github.com/naccdata/form-upload-demo):
 
-1. Using the Python SDK from a Python script.
-2. Using the Python SDK from an R script.
-3. Using the CLI from a bash script.
+1. Using the [Python SDK from a Python script](https://github.com/naccdata/form-upload-demo/tree/main/demo/python-uploader).
+2. Using the [Python SDK from an R script](https://github.com/naccdata/form-upload-demo/tree/main/demo/r-uploader).
+3. Using the [CLI from a bash script](https://github.com/naccdata/form-upload-demo/tree/main/demo/fwcli).
 
 Each of the examples follow these basic steps:
 
@@ -41,18 +41,20 @@ An example scenario is having an uploader script that pulls form data as a repor
 ## Alternative implementations
 
 All of the examples show transferring a single hard-coded file from disk.
+The following are alternative scenarios that may be useful.
 
 ### All the files
 
 A simple alternative is to transfer all the files in the `data` directory.
 In each case, the change would be to iterate over all of the files in the directory and upload each separately.
 
-Since we expect files to have the "module" name as the file suffix, it would be a good idea to only upload files that end with the expected suffix (an example would be `data-export-20240412-udsv4.csv`)
+Since we expect files to have the "module" name as the file suffix, it would be a good idea to only upload files that end with the expected suffix (an example would be `data-export-20240412-udsv4.csv`).
+These suffixes will correspond to the `module` value in each DED and REDCap project.
 
 ### "In memory" data
 
 The Flywheel SDK code for uploading data stored in memory is slightly different than in the example.
-In this case, you upload the file by creating a `flywheel.FileSpec` object that references the contents and then using that to upload the file.
+In this case, you upload the file by creating a `flywheel.FileSpec` object that references the contents and then uses that to upload the file.
 
 If the file contents are in a variable `contents`, then the Python code to upload this data is
 
@@ -68,3 +70,20 @@ file_spec <- flywheel$FileSpec(filename, contents=contents,content_type='text/cs
 upload_project$upload_file(file_spec)
 ```
 
+## An aside: data formats
+
+In this demo, we use the example file [`form-data-dummyv1.csv`](https://github.com/naccdata/form-upload-demo/blob/main/data/form-data-dummyv1.csv).
+
+Please don't read too much into the format of this file, it is an example for you to practice uploading with.
+
+However, there are a couple of points to make about this file:
+
+1. The file name ends in a suffix which is also the value of `module` in each line of the file.
+   If this weren't a made up example, the suffix `dummyv1` would be the designator for the data dictionary that determines the expected columns and their datatype for the file.
+   These data dictionaries are determined by the REDCap project for the forms.
+
+   Incidentally, the reason we ask for the module designator in the file name and in the file is that the first allows us to take advantage of general purpose tools, and avoids building new software that could have it's own bugs.
+
+2. The dialect of CSV file should not matter.
+
+Initially, no pipeline components will be in place to check the data formats, but once new forms are finalized and QC checks defined, these will be enabled for test submissions.
