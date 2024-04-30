@@ -45,7 +45,7 @@ pants package demo/r-uploader/src/docker::
 1. Second, run the example using the command
 
 ```bash
-docker run --platform linux/amd64 --volume "./data":/wd --env-file .env naccdata/r-uploader
+docker run --volume "./data":/wd --env-file .env naccdata/r-uploader
 ```
 
 Note this uploads the file `data/form-data-dummyv1.csv`.
