@@ -43,7 +43,7 @@ pants package demo/python-uploader/src/docker::
 1. Second, run the example using the command
 
 ```bash
-docker run --volume "./data":/wd --env-file .env naccdata/python-uploader
+docker run --platform linux/amd64 --volume "./data":/wd --env-file .env naccdata/python-uploader
 ```
 
 Note this uploads the file `data/form-data-dummyv1.csv`.
