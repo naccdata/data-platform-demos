@@ -5,8 +5,13 @@ Purpose: This documentation describes the demonstrated options for programmatica
 ## Programmatic Upload Options
 
 There are two options to upload data to the Flywheel instance on which the NACC Data Platform is built.
-One is to use the [Flywheel Python SDK](https://flywheel-io.gitlab.io/product/backend/sdk/index.html), and the other is to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI_Command_Guides/).
-Both are demonstrated.
+One is to use the [Flywheel Python SDK](https://flywheel-io.gitlab.io/product/backend/sdk/index.html), and the other is to use a Flywheel CLI tool.
+There are two CLI tools, the [Classic Flywheel CLI tool](https://docs.flywheel.io/CLI_Command_Guides/), and the [Beta Flywheel CLI tool](https://flywheel-io.gitlab.io/tools/app/cli/fw-beta/).
+
+The CLI tools are software for transferring data into Flywheel that are already built and tested.
+The Beta Flywheel is newer, but is limited to transferring data from external storage such as AWS S3, and cannot be used to upload from a local disk.
+
+Because of this limitation, only the SDK and the classic CLI tool are demonstrated.
 
 ## About the examples
 
@@ -30,12 +35,13 @@ Using Docker allows us to define the expected computational environment, and cou
 
 ## Which option should you use?
 
-The CLI tool is software that provides alternatives for transferring data into Flywheel, and is already built and tested.
-But it only works if you have files to transfer.
-So, if you are writing files to disk (or to cloud storage), the CLI is the better alternative.
-This is also a good strategy for initial pilots.
+Generally, we suggest using software that you don't have to maintain, which means using one of the CLI tools.
+But these are only applicable if you are uploading files on disk or from cloud storage.
+If you are generating files stored to disk, the only choice is the classic Flywheel CLI.
+If instead you have files on cloud storage such as AWS S3, then you would use the Beta CLI.
+We suggest using the classic CLI for initial pilots.
 
-If on the other hand, you are creating a file in memory and then uploading, then using the SDK makes more sense.
+However, using the SDK makes more sense if you are creating a file in memory and then uploading.
 An example scenario is having an uploader script that pulls form data as a report from REDCap, which builds the CSV in memory, and then uploads this directly.
 
 ## Alternative implementations
