@@ -9,28 +9,35 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
 
 ## Setting up demo environment
 
-1. Install [Docker](https://www.docker.com) to run the demo examples.
+You'll first need to clone this repository to your computer using Git.
 
-2. We recommend running the demo within a VSCode devcontainer to avoid dependency issues.
-   This repo setup to be run within a devcontainer with Python 3.11 and Docker.
-   You'll need [VSCode](https://code.visualstudio.com) with Dev Containers enabled.
-   For this follow the [Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial) to the point of "Check Installation".
+The most straightforward way to get started is install [VSCode](https://code.visualstudio.com), and then use it to open the repository directory.
+VSCode will then prompt you to install and run the Dev Containers extension, which will in turn prompt you to install [Docker](https://www.docker.com).
+After Docker is installed you will have to start the Docker Desktop from your operating system.
+Once Docker is started, in VSCode click the green bar at the bottom left and choose "Reopen in Container".
 
-   Technically this is not necessary, but the repo is configured to support the demos and can avoid issues.
+Altneratively, you can 
 
-3. With the devcontainer running, open a terminal pane in VSCode using the key combination ctrl-\`.  
+1. Install [Docker](https://www.docker.com)
+2. Install [VSCode](https://code.visualstudio.com)
+3. Follow the [Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial) to the point of "Check Installation".
+   
+which will get you to the same place as above.
+
+Once the Dev Container is running:
+
+1. Open a terminal pane in VSCode using the key combination ctrl-\`.  
    (The key for \` is usually immediately to the left of the 1 key on a US Keyboard.)
 
-4. The repo also uses the [Pants build system](pantsbuild.org).
-   Pants is used because it makes managing dependencies easier.
-
-   To install pants, run the command
+2. Install the [Pants build system](pantsbuild.org) by running the command
 
    ```bash
    bash get-pants.sh
    ```
 
    The full installation will occur the first time you run a pants command.
+
+   Pants is used because it makes managing dependencies easier.   
 
 
 ## API key
