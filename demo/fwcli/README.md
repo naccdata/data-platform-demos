@@ -1,5 +1,8 @@
 # Details for Using the CLI Uploader
 
+> This demo uses a Linux Docker container running on an x86 platform in order to use the Classic Flywheel CLI.
+> The project has been tested on both Apple silicon and Intel Macs.
+
 ## Setting the center and pipeline in the entrypoint script
 
 Before you can run this demo, you need to make a couple of changes in the file `demo/fwcli/src/docker/entrypoint.sh`.
