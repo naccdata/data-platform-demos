@@ -43,7 +43,7 @@ def main():
     upload_project = get_project(client=client,
                                  group_id=group_id,
                                  datatype='form',
-                                 pipeline_type='sandbox', 
+                                 pipeline_type='sandbox',
                                  study_id='adrc')
     if not upload_project:
         log.error("No form sandbox project found for center: %s", group_id)
