@@ -18,7 +18,7 @@ WORKDIR ${SCRIPT_DIR}
 
 COPY demo/fwcli/src/docker/entrypoint.sh .
 
-RUN curl -o fw.zip https://storage.googleapis.com/flywheel-dist/cli/17.8.2/fw-linux_amd64-17.8.2.zip \
+RUN curl -o fw.zip https://storage.googleapis.com/flywheel-dist/cli/18.1.2/fw-linux_amd64-18.1.2.zip \
  && unzip fw.zip \
  && mv linux_amd64 bin \
  && chmod +x entrypoint.sh
