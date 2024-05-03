@@ -9,7 +9,9 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
 
 ## Setting up demo environment
 
-You'll first need to clone this repository to your computer using Git.
+> This demo does assume a Unix/Linux environment. Windows users should see [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/)
+
+You'll first need to [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to your computer using Git.
 
 The most straightforward way to get started is install [VSCode](https://code.visualstudio.com), and then use it to open the repository directory.
 VSCode will then prompt you to install and run the Dev Containers extension, which will in turn prompt you to install [Docker](https://www.docker.com).
@@ -105,5 +107,3 @@ This example uses a Docker image to illustrate deploying a shell script using th
 You can use the CLI as a command, but this shows how the CLI could be used in a production setting.
 
 Details for running this example are given in [`demo/fwcli/README.md`](demo/fwcli/README.md).
-
-
