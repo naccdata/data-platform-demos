@@ -7,6 +7,10 @@ These projects demonstrate using the Flywheel SDK or the Flywheel CLI tool to co
 Keep reading here for details on running the demonstrations.
 See the [documenation](https://naccdata.github.io/form-upload-demo) for general guidance on options.
 
+## Reporting issues
+
+If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/form-upload-demo/issues) of this repository and either chime in on an issue or[ create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+
 ## Setting up demo environment
 
 > This demo does assume a Unix/Linux environment. Windows users should see [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/)
