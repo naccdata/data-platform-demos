@@ -17,10 +17,14 @@ change the argument `adcid` to the ADCID for your center.
 
 ### To set the pipeline
 
-The line
+The command
 
 ```python
-upload_project = get_project(client=client, group_id=group_id)
+    upload_project = get_project(client=client,
+                                 group_id=group_id,
+                                 datatype='form',
+                                 pipeline_type='sandbox',
+                                 study_id='adrc')
 ```
 
 gets the `sandbox-form` pipeline as the upload destination.
