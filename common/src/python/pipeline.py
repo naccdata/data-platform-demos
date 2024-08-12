@@ -29,3 +29,17 @@ def get_project(client: Client,
         log.error("Failed to find project %s", project_label)
 
     return project
+
+
+def get_published_view(client: Client, label: str) -> str:
+    """Return the view ID for the published dataview.
+
+    Args:
+      client: the Flywheel SDK client
+      label: the label for the dataview to return
+    Returns:
+      the ID for the dataview
+    """
+    metadata_project = client.lookup("nacc/metadata")
+    views = client.get_views(metadata_project.id, filter=f"label={label}")
+    return views[0].id
