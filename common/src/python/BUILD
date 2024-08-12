@@ -3,5 +3,13 @@ python_sources(name="lib")
 python_distribution(
     name="nacccommon",
     dependencies=[":lib"],
-    provides=python_artifact(name="nacc-common", version="0.0.1"),
+    wheel=True,
+    sdist=True,
+    provides=python_artifact(
+        name="nacc-common", 
+        version="1.0.0",
+        description="NACC Data Platform utilities",
+        author="NACC",
+        author_email="nacchelp@uw.edu",
+        url="https://github.com/naccdata/form-upload-demo"),
 )
