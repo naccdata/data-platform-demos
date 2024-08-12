@@ -1,7 +1,7 @@
 python_sources(name="lib")
 
 python_distribution(
-    name="nacccommon",
+    name="dist",
     dependencies=[":lib"],
     wheel=True,
     sdist=True,
@@ -11,5 +11,5 @@ python_distribution(
         description="NACC Data Platform utilities",
         author="NACC",
         author_email="nacchelp@uw.edu",
-        url="https://github.com/naccdata/form-upload-demo"),
+        url="https://github.com/naccdata/data-platform-demos"),
 )

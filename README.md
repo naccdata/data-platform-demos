@@ -1,15 +1,14 @@
-# Form Upload Demonstration Code
+# Data Platform Demonstration Code
 
-Demonstration code for uploading form data to the NACC Data Platform.
+Demonstration code for working with the NACC Data Platform.
 
-These projects demonstrate using the Flywheel SDK or the Flywheel CLI tool to connect to the Flywheel instance using code that uploads a file from disk.
+See the [documenation](https://naccdata.github.io/data-platform-demos) for general guidance.
 
 Keep reading here for details on running the demonstrations.
-See the [documenation](https://naccdata.github.io/form-upload-demo) for general guidance on options.
 
 ## Reporting issues
 
-If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/form-upload-demo/issues) of this repository and either chime in on an issue or[create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/data-platform-demos/issues) of this repository and either chime in on an issue or[create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
 ## Setting up demo environment
 
@@ -111,3 +110,41 @@ This example uses a Docker image to illustrate deploying a shell script using th
 You can use the CLI as a command, but this shows how the CLI could be used in a production setting.
 
 Details for running this example are given in [`demo/fwcli/README.md`](demo/fwcli/README.md).
+
+
+## Using the package
+
+The strategies to use the package defined in this repository are to 
+
+1. clone the repository and [build a distribution](#building-a-distribution) locally, or
+2. reference a distribution attached to a [release](https://github.com/naccdata/data-platform-demos/releases) on GitHub.
+
+## Developer guide
+
+### Setup
+
+This repository is setup to use [pants](pantsbuild.org) for developing and building the distributions.
+
+Install pants with the command
+
+```bash
+bash get-pants.sh
+```
+
+You will need to make sure that you have a Python version compatible with the interpreter set in the `pants.toml` file.
+
+The repo has a VSCode devcontainer configuration that ensures a compatible Python is available.
+You need [Docker](https://www.docker.com) installed, and [VSCode](https://code.visualstudio.com) with Dev Containers enabled.
+For this follow the [Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial) to the point of "Check Installation".
+
+### Building a distribution
+
+Once pants is installed, the command 
+
+```bash
+pants package common::
+```
+
+will then build sdist and wheel distributions in the `dist` directory.
+
+> The version number on the distribution files is set in the `common/src/python/BUILD` file.

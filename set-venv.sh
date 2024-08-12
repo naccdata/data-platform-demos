@@ -10,4 +10,4 @@ fi
 
 pants --keep-sandboxes=on_failure export --py-resolve-format=symlinked_immutable_virtualenv --resolve=python-default 
 
-ln -snf dist/export/python/virtualenvs/python-default /workspaces/form-upload-demo/venv
+ln -snf dist/export/python/virtualenvs/python-default /workspaces/data-platform-demos/venv
