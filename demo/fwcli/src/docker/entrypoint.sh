@@ -30,7 +30,7 @@ if ! PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox -s adrc`; then
     echo "ERROR: pipeline lookup failed"
     exit 1
 fi
-echo "Using pipleine: ${PIPELINE}"
+echo "Using pipeline: ${PIPELINE}"
 
 # 4. Upload single file
 fw upload /wd/form-data-dummyv1.csv fw://${CENTER}/${PIPELINE}
