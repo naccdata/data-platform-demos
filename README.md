@@ -9,7 +9,7 @@ See the [documenation](https://naccdata.github.io/form-upload-demo) for general 
 
 ## Reporting issues
 
-If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/form-upload-demo/issues) of this repository and either chime in on an issue or[ create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/form-upload-demo/issues) of this repository and either chime in on an issue or[create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
 ## Setting up demo environment
 
@@ -22,12 +22,12 @@ VSCode will then prompt you to install and run the Dev Containers extension, whi
 After Docker is installed you will have to start the Docker Desktop from your operating system.
 Once Docker is started, in VSCode click the green bar at the bottom left and choose "Reopen in Container".
 
-Altneratively, you can 
+Alternatively, you can 
 
 1. Install [Docker](https://www.docker.com)
 2. Install [VSCode](https://code.visualstudio.com)
 3. Follow the [Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial) to the point of "Check Installation".
-   
+
 which will get you to the same place as above.
 
 Once the Dev Container is running:
@@ -52,7 +52,7 @@ You will need an API Key from the Flywheel system of the NACC Data Platform.
 
 ### Finding your API key
 
-Each API key is associated with a particular user. 
+Each API key is associated with a particular user.
 To get the API key, login as the user to the NACC Flywheel instance.
 
 1. Find the "avatar" in the upper right corner (generally a circle with your initials).
