@@ -1,0 +1,77 @@
+"""Example script for querying identifiers from an enrollment pipeline on NACC
+Data Platform."""
+import logging
+import os
+import sys
+from csv import DictWriter
+from datetime import date
+
+from center_info import get_center_id
+from error_data import get_error_data
+from flywheel import Client
+from pipeline import get_project
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(message)s')
+log = logging.getLogger('__main__')
+
+
+def main():
+    """Queries the enrollment pipeline dataviews available on the NACC Data
+    Platform.
+
+    Uses Flywheel instance determined by the API key value set in
+    FW_API_KEY.
+    """
+
+    # 1. The Flywheel SDK uses a Client object to interact with Flywheel.
+    #    First get the API key from the environment variable FW_API_KEY
+    if 'FW_API_KEY' not in os.environ:
+        log.error("environment variable FW_API_KEY not found")
+        sys.exit(1)
+
+    # 2. Create the Client object using the API key.
+    #    The key determines which instance you are using.
+    client = Client(os.environ['FW_API_KEY'])
+    if not client:
+        log.error("not connected to Flywheel")
+        sys.exit(1)
+
+    # 3. Get the Flywheel group ID for the center by the ADCID.
+    #    This hardcodes the NACC Sample Center, and will have to be changed
+    adcid = 0
+    group_id = get_center_id(client=client, adcid=adcid)
+    log.info("Group ID for ADCID %s is %s", adcid, group_id)
+
+    # 4. Get the enrollment form sandbox pipeline project
+    #    Set the parameter pipeline_type='ingest' to upload center data.
+    source_project = get_project(client=client,
+                                 group_id=group_id,
+                                 datatype='enrollment',
+                                 pipeline_type='sandbox',
+                                 study_id='adrc')
+    if not source_project:
+        log.error("No enrollment sandbox project found for center: %s",
+                  group_id)
+        sys.exit(1)
+
+    log.info("Using project %s/%s", source_project.group, source_project.label)
+
+    # 5. Collect error data from project
+    table = get_error_data(source_project)
+
+    if not table:
+        log.info("no errors")
+        return
+
+    # 6. Format data
+    header_names = list(table[0].keys())
+    with open(f'errors-{source_project.label}-{date.today()}.csv',
+              mode='utf-8') as out_file:
+        writer = DictWriter(out_file, fieldnames=header_names)
+        writer.writeheader()
+        writer.writerows(table)
+
+
+if __name__ == "__main__":
+    main()
