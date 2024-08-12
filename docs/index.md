@@ -1,12 +1,14 @@
 # Form Upload Demonstrations
 
-Purpose: This documentation describes the demonstrated options for programmatically uploading form data to NACC.
+Purpose: This documentation describes the demonstrated options for uploading form data to NACC directly from center data systems.
+
+To manually upload files from the command line of your computer, please see the [Flywheel CLI](https://docs.naccdata.org/edc/data-uploads-and-quality-checks/uploads-to-nacc/programmatic-uploads#flywheel-cli) in the NACC Documentation pages.
 
 ## Programmatic Upload Options
 
 There are two options to upload data to the Flywheel instance on which the NACC Data Platform is built.
 One is to use the [Flywheel Python SDK](https://flywheel-io.gitlab.io/product/backend/sdk/index.html), and the other is to use a Flywheel CLI tool.
-There are two CLI tools, the [Classic Flywheel CLI tool](https://docs.flywheel.io/CLI_Command_Guides/), and the [Beta Flywheel CLI tool](https://flywheel-io.gitlab.io/tools/app/cli/fw-beta/).
+There are two CLI tools, the [Classic Flywheel CLI tool](https://docs.flywheel.io/CLI/), and the [Beta Flywheel CLI tool](https://flywheel-io.gitlab.io/tools/app/cli/fw-beta/).
 
 The CLI tools are software for transferring data into Flywheel that are already built and tested.
 The Beta Flywheel is newer, but is limited to transferring data from external storage such as AWS S3, and cannot be used to upload from a local disk.
