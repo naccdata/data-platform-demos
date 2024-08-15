@@ -1,5 +1,6 @@
 """Example script for querying identifiers from an enrollment pipeline on NACC
 Data Platform."""
+import argparse
 import logging
 import os
 import sys
@@ -23,6 +24,30 @@ def main():
     Uses Flywheel instance determined by the API key value set in
     FW_API_KEY.
     """
+    # 0. The argument parser is used to allow running the script from the
+    #    command line.
+    parser = argparse.ArgumentParser(description="Upload file")
+    parser.add_argument('-a',
+                        '--adcid',
+                        help='the center group name',
+                        type=int,
+                        choices=range(0, 100),
+                        required=True)
+    parser.add_argument('-d',
+                        '--datatype',
+                        choices=['dicom', 'enrollment', 'form'],
+                        help='the datatype name (default: form)',
+                        default='form')
+    parser.add_argument('-p',
+                        '--pipeline',
+                        choices=['ingest', 'sandbox'],
+                        help='the pipeline type (default: sandbox)',
+                        default='sandbox')
+    parser.add_argument('-s',
+                        '--studyid',
+                        help='the study ID (default: adrc)',
+                        default='adrc')
+    args = parser.parse_args()
 
     # 1. The Flywheel SDK uses a Client object to interact with Flywheel.
     #    First get the API key from the environment variable FW_API_KEY
@@ -38,18 +63,15 @@ def main():
         sys.exit(1)
 
     # 3. Get the Flywheel group ID for the center by the ADCID.
-    #    This hardcodes the NACC Sample Center, and will have to be changed
-    adcid = 0
-    group_id = get_center_id(client=client, adcid=adcid)
-    log.info("Group ID for ADCID %s is %s", adcid, group_id)
+    group_id = get_center_id(client=client, adcid=str(args.adcid))
+    log.info("Group ID for ADCID %s is %s", args.adcid, group_id)
 
-    # 4. Get the enrollment form sandbox pipeline project
-    #    Set the parameter pipeline_type='ingest' to upload center data.
+    # 4. Get the pipeline project
     source_project = get_project(client=client,
                                  group_id=group_id,
-                                 datatype='enrollment',
-                                 pipeline_type='sandbox',
-                                 study_id='adrc')
+                                 datatype=args.datatype,
+                                 pipeline_type=args.pipeline,
+                                 study_id=args.studyid)
     if not source_project:
         log.error("No enrollment sandbox project found for center: %s",
                   group_id)
@@ -61,13 +83,14 @@ def main():
     table = get_error_data(source_project)
 
     if not table:
-        log.info("no errors")
+        log.info("no errors in project %s", source_project)
         return
 
     # 6. Format data
     header_names = list(table[0].keys())
     with open(f'errors-{source_project.label}-{date.today()}.csv',
-              mode='utf-8') as out_file:
+              mode='w',
+              encoding='utf-8') as out_file:
         writer = DictWriter(out_file, fieldnames=header_names)
         writer.writeheader()
         writer.writerows(table)
