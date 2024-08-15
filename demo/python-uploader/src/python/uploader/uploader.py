@@ -1,4 +1,5 @@
 """Example uploader script for submitting forms to NACC Data Platform."""
+import argparse
 import logging
 import os
 import sys
@@ -18,6 +19,31 @@ def main():
     Uses Flywheel instance determined by the API key value set in
     FW_API_KEY.
     """
+    # 0. The argument parser is used to allow running the script from the
+    #    command line.
+    parser = argparse.ArgumentParser(description="Upload file")
+    parser.add_argument('-a',
+                        '--adcid',
+                        help='the center group name',
+                        type=int,
+                        choices=range(0, 100),
+                        required=True)
+    parser.add_argument('-d',
+                        '--datatype',
+                        choices=['dicom', 'enrollment', 'form'],
+                        help='the datatype name (default: form)',
+                        default='form')
+    parser.add_argument('-p',
+                        '--pipeline',
+                        choices=['ingest', 'sandbox'],
+                        help='the pipeline type (default: sandbox)',
+                        default='sandbox')
+    parser.add_argument('-s',
+                        '--studyid',
+                        help='the study ID (default: adrc)',
+                        default='adrc')
+    parser.add_argument('filepath', help='the path to the file to upload')
+    args = parser.parse_args()
 
     # 1. The Flywheel SDK uses a Client object to interact with Flywheel.
     #    First get the API key from the environment variable FW_API_KEY
@@ -33,18 +59,17 @@ def main():
         sys.exit(1)
 
     # 3. Get the Flywheel group ID for the center by the ADCID.
-    #    This hardcodes the NACC Sample Center, and will have to be changed
-    group_id = get_center_id(client=client, adcid='0')
-    log.info("Group ID for ADCID 0 is %s", group_id)
+    group_id = get_center_id(client=client, adcid=str(args.adcid))
+    log.info("Group ID for ADCID %s is %s", args.adcid, group_id)
 
     # 4. Get the form sandbox pipeline project
     #    The default behavior is to upload to a testing sandbox for form data.
     #    Set the parameter pipeline_type='ingest' to upload center data.
     upload_project = get_project(client=client,
                                  group_id=group_id,
-                                 datatype='form',
-                                 pipeline_type='sandbox',
-                                 study_id='adrc')
+                                 datatype=args.datatype,
+                                 pipeline_type=args.pipeline,
+                                 study_id=args.studyid)
     if not upload_project:
         log.error("No form sandbox project found for center: %s", group_id)
         sys.exit(1)
@@ -54,19 +79,16 @@ def main():
     # 5. Upload the file.
     #    This script assumes it is run in an environment with a directory /wd,
     #    which is set within the Dockerfile.
-    filename = "form-data-dummyv1.csv"
-    file_path = f"/wd/{filename}"
-
-    if not os.path.exists(file_path):
-        log.error("no file found: %s", filename)
+    if not os.path.exists(args.filepath):
+        log.error("no file found: %s", args.filepath)
         sys.exit(1)
 
-    if not os.path.getsize(file_path) > 0:
-        log.error("file %s is empty", filename)
+    if not os.path.getsize(args.filepath) > 0:
+        log.error("file %s is empty", args.filepath)
         sys.exit(1)
 
-    response = upload_project.upload_file(file_path)
-    log.info("uploaded file %s: %s bytes", filename, response[0]['size'])
+    response = upload_project.upload_file(args.filepath)
+    log.info("uploaded file %s: %s bytes", args.filepath, response[0]['size'])
 
 
 if __name__ == "__main__":
