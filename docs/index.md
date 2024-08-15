@@ -44,5 +44,4 @@ Distributions can be accessed via each [release](https://github.com/naccdata/dat
 2. Accessing tabular data views
    - Example: [pulling upload errors](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_errors)
    - Example: [pulling participant identifiers](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_identifiers)
-   - Example: [pulling flywheel dataviews (in general)](https://github.com/naccdata/data-platform-demos/tree/main/demo/dataviews)
 
