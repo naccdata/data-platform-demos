@@ -10,40 +10,52 @@ Keep reading here for details on running the demonstrations.
 
 If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/data-platform-demos/issues) of this repository and either chime in on an issue or[create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
+## About the demos
+
+The goal of these demos is to provide examples for people who are familiar with developing software.
+
+If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data. 
+There are some scenarios (pulling participant identifiers, or QC errors) that still require some scripting.
+
+Please ask for help if something is unclear or you are having difficulty.
+
+
 ## Setting up demo environment
 
-> This demo does assume a Unix/Linux environment. Windows users should see [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/)
+> This demo uses the [Pants build system](pantsbuild.org), and assumes a Unix/Linux environment. 
+> Windows can use [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
+> See the [pants requirements](https://www.pantsbuild.org/2.21/docs/getting-started/prerequisites).
 
 You'll first need to [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to your computer using Git.
 
-The most straightforward way to get started is install [VSCode](https://code.visualstudio.com), and then use it to open the repository directory.
-VSCode will then prompt you to install and run the Dev Containers extension, which will in turn prompt you to install [Docker](https://www.docker.com).
+### Python environment
+
+You will need a Python 3.11 interpreter installed.
+
+The simplest approach may to be to [install Python](https://www.python.org/downloads/).
+
+But, the repository is setup to use a VSCode Dev Container for Python.
+Getting this going from scratch requires installing [VSCode](https://code.visualstudio.com), [Docker](https://www.docker.com) and setting up [Dev Containers](https://code.visualstudio.com/docs/devcontainers/tutorial).
+This approach is not suggested unless you want to use the same environment we are using.
+
+Incidentally, when you open the repository with VSCode, it will prompt you to install and run the Dev Containers extension, which will in turn prompt you to install [Docker](https://www.docker.com).
 After Docker is installed you will have to start the Docker Desktop from your operating system.
 Once Docker is started, in VSCode click the green bar at the bottom left and choose "Reopen in Container".
 
-Alternatively, you can 
+### Using Pants
 
-1. Install [Docker](https://www.docker.com)
-2. Install [VSCode](https://code.visualstudio.com)
-3. Follow the [Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial) to the point of "Check Installation".
-
-which will get you to the same place as above.
-
-Once the Dev Container is running:
-
-1. Open a terminal pane in VSCode using the key combination ctrl-\`.  
-   (The key for \` is usually immediately to the left of the 1 key on a US Keyboard.)
-
-2. Install the [Pants build system](pantsbuild.org) by running the command
+Once you have a Python 3.11 environment, install the [Pants build system](pantsbuild.org) by running the command
 
    ```bash
    bash get-pants.sh
    ```
 
-   The full installation will occur the first time you run a pants command.
+The full installation will occur the first time you run a pants command.
 
-   Pants is used because it makes managing dependencies easier.   
+Pants is used because it makes managing dependencies easier, however, it does only run in [Unix/Linux environments](https://www.pantsbuild.org/2.21/docs/getting-started/prerequisites).
 
+If you don't want to use Pants, keep in mind that it may be sufficient for you to look at the code, and adapt it to your environment.
+And, of course, you are welcome to change your copy of the repository.
 
 ## API key
 
@@ -61,7 +73,7 @@ To get the API key, login as the user to the NACC Flywheel instance.
 5. Copy the API Key since you wont be able to access the value later.
 6. Keep the key secret  
 
-## Storing your API key
+### Storing your API key
 
 For this particular demo, we are storing the API key in a `.env` file.
 
@@ -83,7 +95,8 @@ FW_API_KEY=<the value of the API key>
 
 > The `.env` file is included in the `.gitignore` file intentionally to prevent inclusion of the API token in a Git repository.
 
-## Python uploader
+## Demos
+### Python uploader
 
 The Python uploader is defined in the directory `demo/python-uploader`.
 
@@ -92,7 +105,7 @@ This example uses a Docker image to illustrate deploying a Python script to uplo
 Details on this example are given in [`demo/python-uploader/README.md`](demo/python-uploader/README.md).
 
 
-## R uploader
+### R uploader
 
 The R uploader is defined in the directory `demo/r-uploader`.
 
@@ -102,7 +115,7 @@ As mentioned above, if uploading from disk is your scenario, you should consider
 Details on this example are given in [`demo/r-uploader/README.md`](demo/r-uploader/README.md).
 
 
-## CLI uploader
+### CLI uploader
 
 The CLI uploader is defined in the directory `demo/fwcli-uploader`.
 
@@ -111,13 +124,21 @@ You can use the CLI as a command, but this shows how the CLI could be used in a 
 
 Details for running this example are given in [`demo/fwcli/README.md`](demo/fwcli/README.md).
 
+### Pulling pipeline errors
 
-## Using the package
+The error pull demo is in the directory `demo/pull_errors`.
 
-The strategies to use the package defined in this repository are to 
+This example is a Python script that uses the `error_data.get_error_data` function from `nacc-common` package to pull error data from a pipleine project.
 
-1. clone the repository and [build a distribution](#building-a-distribution) locally, or
-2. reference a distribution attached to a [release](https://github.com/naccdata/data-platform-demos/releases) on GitHub.
+Details for running this example are given in [`demo/pull_errors/README.md`](demo/pull_errors/README.md)
+
+### Pulling participant identifiers
+
+The participant identifier (dataview) demo is in the directory `demo/pull_identifiers`.
+
+This example is a Python script that pulls participant identifiers from an enrollment ingest project using a NACC created dataview.
+
+Details about this example are given in [`demo/pull_identifiers/README.md`](demo/pull_identifiers/README.md)
 
 ## Developer guide
 
