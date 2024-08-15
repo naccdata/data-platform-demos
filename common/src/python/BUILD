@@ -6,7 +6,7 @@ python_distribution(
     wheel=True,
     sdist=True,
     provides=python_artifact(
-        name="nacc-common", 
+        name="nacc-common",
         version="1.0.0",
         description="NACC Data Platform utilities",
         author="NACC",

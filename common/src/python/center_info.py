@@ -28,4 +28,4 @@ def get_center_id(client: Client, adcid: str) -> Optional[str]:
         log.error("No center with ADCID %s in nacc/metadata", adcid)
         return None
 
-    return metadata.info['centers'][adcid]['group']
+    return metadata.info['centers'][str(adcid)]['group']
