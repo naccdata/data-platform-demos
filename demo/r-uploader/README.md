@@ -2,6 +2,10 @@
 
 > This demo uses the [reticulate](https://rstudio.github.io/reticulate/) package to use the Flywheel Python SDK within R.
 
+You will need [Docker](https://www.docker.com) installed to be able to run this demo.
+
+>If you are running the VSCode Dev Container for the repo (see the [top-level README](../../README.md#python-environment)), then Docker is already installed.
+
 ## Setting the center and pipeline
 
 Before you can run this demo, you need to make a couple of changes in the file `demo/r-uploader/src/r/uploader/uploader.R`.
