@@ -12,7 +12,8 @@ log = logging.getLogger('__main__')
 
 def main():
     """Look up pipeline based on command line argument values."""
-    parser = argparse.ArgumentParser(description="Lookup pipeline name")
+    parser = argparse.ArgumentParser(
+        description="Lookup pipeline project label")
     parser.add_argument('-c',
                         '--center',
                         help='the center group name',

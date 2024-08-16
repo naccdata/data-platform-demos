@@ -12,7 +12,7 @@ log = logging.getLogger('__main__')
 
 def main():
     """Lookup the FW group ID using the center ADCID."""
-    parser = argparse.ArgumentParser(description="Lookup pipeline name")
+    parser = argparse.ArgumentParser(description="Lookup center group")
     parser.add_argument('adcid',
                         help='the center group name',
                         type=int,

@@ -22,7 +22,8 @@ def main():
     Uses Flywheel instance determined by the API key value set in
     FW_API_KEY.
     """
-    parser = argparse.ArgumentParser(description="Pull enrollment identifiers for a study")
+    parser = argparse.ArgumentParser(
+        description="Pull enrollment identifiers for a study")
     parser.add_argument('-a',
                         '--adcid',
                         help='the center group name',

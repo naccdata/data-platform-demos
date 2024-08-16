@@ -26,7 +26,8 @@ def main():
     """
     # 0. The argument parser is used to allow running the script from the
     #    command line.
-    parser = argparse.ArgumentParser(description="Upload file")
+    parser = argparse.ArgumentParser(
+        description="Pull file errors for pipeline project")
     parser.add_argument('-a',
                         '--adcid',
                         help='the center group name',
