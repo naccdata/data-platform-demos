@@ -133,3 +133,24 @@ pants package common::
 will then build sdist and wheel distributions in the `dist` directory.
 
 > The version number on the distribution files is set in the `common/src/python/BUILD` file.
+
+### Upload distribution
+
+1. Format the code in the respository with
+
+   ```bash
+   pants fix ::
+   ```
+
+   and commit any changes.
+
+2. Create and push the tag
+
+   ```bash
+   VERSION="v.<current-version>"
+   git tag -a "$VERSION" -m "Data Platform demos $VERSION"
+   git push --tags
+   ```
+
+3. Create release and upload distribution files
+   [This should be automated by github action] 
