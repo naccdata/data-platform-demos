@@ -1,5 +1,8 @@
 # Details for Using the CLI Uploader
 
+This example uses a Docker image to illustrate deploying a shell script using the FW CLI to upload a file from disk. 
+You can use the CLI as a command, but this shows how the CLI could be used in a production setting.
+
 > This demo uses a Linux Docker container running on an x86 platform in order to use the Classic Flywheel CLI.
 > The project has been tested on both Apple silicon and Intel Macs.
 

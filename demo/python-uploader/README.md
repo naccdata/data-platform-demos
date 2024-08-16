@@ -1,5 +1,8 @@
 # Python Uploader
 
+This example illustrates a Python script to upload a file from disk.
+*If are uploading from disk, you should consider using the Flywheel CLI instead of writing your own script.*
+
 Follow the steps in the [top-level README](../../README.md#setting-up-demo-environment) for getting started.
 
 > All commands need to be run with the top-level directory of the repository as the working directory.

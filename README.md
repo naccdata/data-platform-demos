@@ -12,12 +12,13 @@ If you run into a problem with the demo, please see the [Issues page](https://gi
 
 ## About the demos
 
-The goal of these demos is to provide examples for people who are familiar with developing software.
+These demos are meant to provide examples for people who are familiar with developing software.
 
 If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data. 
-There are some scenarios (pulling participant identifiers, or QC errors) that still require some scripting.
+There are some tasks (pulling participant identifiers and file upload errors) that cannot be done with the CLI, but are supported by the ADRC portals.
+Otherwise, the code here could be adapted to use in Jupyter notebooks or command line scripts.
 
-Please ask for help if something is unclear or you are having difficulty.
+Please ask for help if something is unclear.
 
 
 ## Setting up demo environment
@@ -96,49 +97,12 @@ FW_API_KEY=<the value of the API key>
 > The `.env` file is included in the `.gitignore` file intentionally to prevent inclusion of the API token in a Git repository.
 
 ## Demos
-### Python uploader
 
-The Python uploader is defined in the directory `demo/python-uploader`.
-
-This example uses a Docker image to illustrate deploying a Python script to upload a file from disk. As mentioned above, if this is your scenario, you should consider using the Flywheel CLI instead of writing your own script.
-
-Details on this example are given in [`demo/python-uploader/README.md`](demo/python-uploader/README.md).
-
-
-### R uploader
-
-The R uploader is defined in the directory `demo/r-uploader`.
-
-This example uses a Docker image to illustrate deploying a R script calling Python to upload a file from disk. 
-As mentioned above, if uploading from disk is your scenario, you should consider using the Flywheel CLI instead of writing your own script.
-
-Details on this example are given in [`demo/r-uploader/README.md`](demo/r-uploader/README.md).
-
-
-### CLI uploader
-
-The CLI uploader is defined in the directory `demo/fwcli-uploader`.
-
-This example uses a Docker image to illustrate deploying a shell script using the FW CLI to upload a file from disk. 
-You can use the CLI as a command, but this shows how the CLI could be used in a production setting.
-
-Details for running this example are given in [`demo/fwcli/README.md`](demo/fwcli/README.md).
-
-### Pulling pipeline errors
-
-The error pull demo is in the directory `demo/pull_errors`.
-
-This example is a Python script that uses the `error_data.get_error_data` function from `nacc-common` package to pull error data from a pipleine project.
-
-Details for running this example are given in [`demo/pull_errors/README.md`](demo/pull_errors/README.md)
-
-### Pulling participant identifiers
-
-The participant identifier (dataview) demo is in the directory `demo/pull_identifiers`.
-
-This example is a Python script that pulls participant identifiers from an enrollment ingest project using a NACC created dataview.
-
-Details about this example are given in [`demo/pull_identifiers/README.md`](demo/pull_identifiers/README.md)
+- [Python uploader](demo/python-uploader/README.md).
+- [R uploader](demo/r-uploader/README.md).
+- [CLI uploader](demo/fwcli/README.md).
+- [Python error puller](demo/pull_errors/README.md)
+- [Python identifier puller](demo/pull_identifiers/README.md)
 
 ## Developer guide
 

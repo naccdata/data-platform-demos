@@ -1,5 +1,8 @@
 # R Uploader
 
+This example uses a Docker image to illustrate deploying a R script calling Python to upload a file from disk. 
+As mentioned above, if uploading from disk is your scenario, you should consider using the Flywheel CLI instead of writing your own script.
+
 > This demo uses the [reticulate](https://rstudio.github.io/reticulate/) package to use the Flywheel Python SDK within R.
 
 You will need [Docker](https://www.docker.com) installed to be able to run this demo.

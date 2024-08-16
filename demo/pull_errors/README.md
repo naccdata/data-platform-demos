@@ -1,6 +1,6 @@
 # Pulling pipeline file errors
 
-This demo shows how to pull file errors from a pipeline project.
+This example is a Python script that uses the `error_data.get_error_data` function from `nacc-common` package to pull error data from a pipleine project.
 
 Follow the steps in the [top-level README](../../README.md#setting-up-demo-environment) for getting started.
 

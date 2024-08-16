@@ -1,6 +1,6 @@
 # Pulling Participant Identifiers
 
-This demo shows how to pull participant identifiers from an enrollment pipeline project.
+This example is a Python script that pulls participant identifiers from an enrollment ingest project using a NACC created dataview.
 
 >Enrollment projects are associated with a particular study.
 
