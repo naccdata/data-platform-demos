@@ -3,7 +3,6 @@
 Purpose: This documentation describes programmatic options for working with the Flywheel system underneath the NACC Data Platform.
 
 *These demos are meant to provide examples for people who are familiar with developing software and can adapt them to their working environment.*
-
 If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data. 
 There are some tasks (pulling participant identifiers and file upload errors) that cannot be done with the CLI, but are supported by the ADRC portals.
 Otherwise, the code here could be adapted to use in Jupyter notebooks or command line scripts.
