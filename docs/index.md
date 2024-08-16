@@ -2,15 +2,33 @@
 
 Purpose: This documentation describes programmatic options for working with the Flywheel system underneath the NACC Data Platform.
 
-## About these demos
-
-The goal of these demos is to provide examples for people who are familiar with developing software.
+*These demos are meant to provide examples for people who are familiar with developing software and can adapt them to their working environment.*
 
 If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data. 
-There are some scenarios (pulling participant identifiers, or QC errors) that will still require some scripting.
-Please ask for help if something seems unclear or especially complicated.
+There are some tasks (pulling participant identifiers and file upload errors) that cannot be done with the CLI, but are supported by the ADRC portals.
+Otherwise, the code here could be adapted to use in Jupyter notebooks or command line scripts.
 
-## About Data Platform pipelines
+## Demos:
+
+1. Uploading tabular data (e.g., form and other CSV data)
+   - [Python script](https://github.com/naccdata/data-platform-demos/tree/main/demo/python-uploader).
+   - [R script](https://github.com/naccdata/data-platform-demos/tree/main/demo/r-uploader).
+   - [Shell script](https://github.com/naccdata/data-platform-demos/tree/main/demo/fwcli).
+
+2. Accessing tabular data views (Python SDK)
+   - [Pulling upload errors](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_errors)
+   - [Pulling participant identifiers](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_identifiers)
+
+## NACC-Common Python package
+
+The `common` directory of the [demo repository](https://github.com/naccdata/data-platform-demos) contains a package of utilities used in the demo code.
+Using these functions can help you avoid situations where data organization might be changed.
+
+Distributions can be accessed via each [release](https://github.com/naccdata/data-platform-demos/releases) on GitHub.
+
+## About Data Platform and pipelines
+
+It is helpful for most of these tutorials to understand how data is organized within the NACC Data Platform.
 
 The NACC Data Platform is built on top of the Flywheel data management system.
 Flywheel organizes data by group and project, under which data for individual subjects is stored.
@@ -29,19 +47,4 @@ The group and projects IDs and labels are used in uploading and accessing data w
 For instance, the form ingest project in the NACC Sample Center, is referenced as `sample-center/ingest-form`.
 
 The demo code includes utility functions that help build these references.
-The function `center_info.get_center_id()` returns the group ID when given a center's ADCID (the numeric ID used on form submissions).
-And, `pipeline.get_project()` constructs the project label for a pipeline project.
-
-## NACC-Common package
-
-The `common` directory of the demo repository contains a package of utilities used in the demo code.
-Distributions can be accessed via each [release](https://github.com/naccdata/data-platform-demos/releases) on GitHub.
-
-
-## Scenarios
-
-1. [Uploading form (tabular) data](upload.md)
-2. Accessing tabular data views
-   - Example: [pulling upload errors](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_errors)
-   - Example: [pulling participant identifiers](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_identifiers)
-
+The function `center_info.get_center_id()` in the common package returns the group ID when given a center's ADCID (the numeric ID used on form submissions), and `pipeline.get_project()` constructs the project label for a pipeline project.
