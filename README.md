@@ -147,7 +147,7 @@ will then build sdist and wheel distributions in the `dist` directory.
 2. Create and push the tag
 
    ```bash
-   VERSION="v.<current-version>"
+   VERSION="v<current-version>"
    git tag -a "$VERSION" -m "Data Platform demos $VERSION"
    git push --tags
    ```
