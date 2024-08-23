@@ -16,7 +16,7 @@ The demo can be run using Pants with the command
 pants run demo/pull_identifiers/src/python/pull_identifiers.py -- --adcid 0 --pipeline sandbox
 ```
 
-which will create a file `errors-sandbox-enrollment-<date>.csv` in the top level directory.
+which will create a file `center-identifiers-<date>.csv` in the top level directory.
 
 (The Pants run command requires `--` before any command-line parameters.)
 
