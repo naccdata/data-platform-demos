@@ -1,5 +1,5 @@
 [GLOBAL]
-pants_version = "2.19.2"
+pants_version = "2.20.4"
 backend_packages = [
     "pants.backend.build_files.fmt.yapf",
     "pants.backend.docker",

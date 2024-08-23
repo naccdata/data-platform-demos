@@ -7,7 +7,7 @@ WORKDIR ${BUILD_DIR}
 COPY requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /build/wheels -r requirements.txt
 
-COPY nacc_common-0.0.1-py3-none-any.whl ./wheels
+COPY nacc_common-1.0.0-py3-none-any.whl ./wheels
 
 ###
 FROM python:3.11-slim
