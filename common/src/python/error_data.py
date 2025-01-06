@@ -4,6 +4,30 @@ from typing import Any, Dict, List
 from flywheel import Project
 
 
+def qc_data(file_object: Dict[str, Any]) -> Dict[str, Any]:
+    """Returns the QC object in the metadata for the file.
+
+    Args:
+      file_object: the file metadata
+    Returns:
+      the dictionary for info.qc if non-empty. Otherwise, the empty dictionary.
+    """
+    return file_object.get('info', {}).get('qc', {})
+
+
+def error_data(qc_object: Dict[str, Any], gear_name: str) -> Dict[str, Any]:
+    """Returns the error object in the QC metadata.
+
+    Args:
+      qc_object: the QC metadata (file.qc)
+      gear_name: the name of the gear
+    Returns:
+      the dictionary for gear_name.validation.data if exists.
+      Otherwise, the empty dictionary.
+    """
+    return qc_object.get(gear_name, {}).get('validation', {}).get('data', {})
+
+
 def build_rows(file_object: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Builds a list of error table rows from the file dictionary object.
 
@@ -12,11 +36,11 @@ def build_rows(file_object: Dict[str, Any]) -> List[Dict[str, Any]]:
     Args:
       file_object: the file dictionary
     """
-    gear_names = {key for key in file_object['info']['qc'].keys()}
+    qc_object = qc_data(file_object)
+    gear_names = set(qc_object.keys())
     table = []
     for gear_name in gear_names:
-        for error in file_object['info']['qc'][gear_name]['validation'][
-                'data']:
+        for error in error_data(qc_object, gear_name):
             loc = error.pop('location', {})
             if loc:
                 error.update(loc)
@@ -36,7 +60,7 @@ def get_error_data(project: Project) -> List[Dict[str, Any]]:
     Args:
       project: the flywheel project object
     """
-    project = project.reload()
+    project: Project = project.reload()
     return [
         item for sl in [
             build_rows(file) for file in project.files
