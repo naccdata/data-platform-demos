@@ -88,11 +88,14 @@ def main():
         return
 
     # 6. Format data
-    header_names = list(table[0].keys())
+    header_names = set() 
+    for row in table:
+        header_names = header_names.union(row.keys())
+
     with open(f'errors-{source_project.label}-{date.today()}.csv',
               mode='w',
               encoding='utf-8') as out_file:
-        writer = DictWriter(out_file, fieldnames=header_names)
+        writer = DictWriter(out_file, fieldnames=header_names, dialect='unix')
         writer.writeheader()
         writer.writerows(table)
 
