@@ -8,7 +8,7 @@ from csv import DictWriter
 from datetime import date
 
 from center_info import get_center_id
-from error_data import get_error_data
+from error_data import ERROR_HEADER_NAMES, get_error_data
 from flywheel import Client
 from pipeline import get_project
 
@@ -88,14 +88,12 @@ def main():
         return
 
     # 6. Format data
-    header_names = set() 
-    for row in table:
-        header_names = header_names.union(row.keys())
-
     with open(f'errors-{source_project.label}-{date.today()}.csv',
               mode='w',
               encoding='utf-8') as out_file:
-        writer = DictWriter(out_file, fieldnames=header_names, dialect='unix')
+        writer = DictWriter(out_file,
+                            fieldnames=ERROR_HEADER_NAMES,
+                            dialect='unix')
         writer.writeheader()
         writer.writerows(table)
 

@@ -3,6 +3,12 @@ from typing import Any, Dict, List
 
 from flywheel import Project
 
+ERROR_HEADER_NAMES = [
+    'type', 'ptid', 'visitnum', 'code', 'line', 'column_name', 'key_path',
+    'id', 'name', 'gear', 'container_id', 'flywheel_path', 'value', 'expected',
+    'message', 'timestamp'
+]
+
 
 def qc_data(file_object: Dict[str, Any]) -> Dict[str, Any]:
     """Returns the QC object in the metadata for the file.
