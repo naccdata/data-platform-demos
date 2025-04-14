@@ -20,6 +20,20 @@ Otherwise, the code here could be adapted to use in Jupyter notebooks or command
 
 Please ask for help if something is unclear.
 
+## Table of Contents
+
+* [Setting up demo environment](#setting-up-demo-environment)
+    * [Python environment](#python-environment)
+    * [Using Pants](#using-pants)
+* [API key](#api-key)
+    * [Finding your API key](#finding-your-api-key)
+    * [Storing your API key](#storing-your-api-key)
+* [Demos](#demos)
+    * [Developer guide](#developer-guide)
+        * [Setup](#setup)
+        * [Building a distribution](#building-a-distribution)
+        * [Installing a distribution](#installing-a-distribution)
+        * [Uploading a distribution](#Uploading-a-distribution)
 
 ## Setting up demo environment
 
@@ -134,7 +148,16 @@ will then build sdist and wheel distributions in the `dist` directory.
 
 > The version number on the distribution files is set in the `common/src/python/BUILD` file.
 
-### Upload distribution
+### Installing a distribution
+
+The built wheel can be installed into a Python environment using pip. It is recommended to use a virtual environment or Docker image as opposed to your machine's local environment, especially if you are running something other than Python 3.11 as required by these demos.
+
+```bash
+# replace <version> with the version that was built
+pip3 install nacc_common-<version>-py3-none-any.whl
+```
+
+### Uploading a distribution
 
 1. Format the code in the respository with
 
