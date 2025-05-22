@@ -1,0 +1,55 @@
+# Based on
+# https://github.com/pantsbuild/example-python/blob/main/.github/workflows/pants.yaml
+
+name: Build Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+   contents: write
+
+jobs:
+  build:
+    name: Build package and release
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: pantsbuild/actions/init-pants@v8
+      with:
+        gha-cache-key: v0
+        named-caches-hash: ${{ hashFiles('python-default.lock') }}
+        cache-lmdb-store: 'false'  # defaults to 'false'
+    - name: Set env
+      run: echo "VER=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: Reset version to match github tag
+      run: |
+        sed -i 's|version=.*|version="'$VER'",|g' common/src/python/BUILD
+        cat common/src/python/BUILD
+    - name: Lint
+      run: |
+        pants lint ::
+        pants check ::
+    - name: Test
+      run: |
+        pants test ::
+    - name: Build package
+      run: |
+        pants package ::
+    - name: Upload package
+      uses: softprops/action-gh-release@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        generate_release_notes: true
+        files: |
+          dist/*
+      if: always() # We want the log even on failures.
