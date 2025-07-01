@@ -1,7 +1,8 @@
 """Utilities for pulling error data attached to files."""
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Literal, Optional
 
-from flywheel import Project
+from flywheel import FileOutput, Project
+
 
 ERROR_HEADER_NAMES = [
     'type', 'ptid', 'visitnum', 'code', 'line', 'column_name', 'key_path',
@@ -10,7 +11,7 @@ ERROR_HEADER_NAMES = [
 ]
 
 
-def qc_data(file_object: Dict[str, Any]) -> Dict[str, Any]:
+def qc_data(file_object: FileOutput) -> Dict[str, Any]:
     """Returns the QC object in the metadata for the file.
 
     Args:
@@ -21,20 +22,45 @@ def qc_data(file_object: Dict[str, Any]) -> Dict[str, Any]:
     return file_object.get('info', {}).get('qc', {})
 
 
+def validation_data(qc_object: Dict[str, Any], gear_name: str) -> Dict[str, Any]:
+    """Returns the validation object in the QC metadata for the named gear
+    
+    Args:
+      qc_object: the QC metadata (file.info.qc)
+      gear_name: the name of the gear"""
+    return qc_object.get(gear_name, {}).get('validation', {})
+
 def error_data(qc_object: Dict[str, Any], gear_name: str) -> Dict[str, Any]:
     """Returns the error object in the QC metadata.
 
     Args:
-      qc_object: the QC metadata (file.qc)
+      qc_object: the QC metadata (file.info.qc)
       gear_name: the name of the gear
     Returns:
       the dictionary for gear_name.validation.data if exists.
       Otherwise, the empty dictionary.
     """
-    return qc_object.get(gear_name, {}).get('validation', {}).get('data', {})
+    return validation_data(qc_object=qc_object, gear_name=gear_name).get('data', {})
+
+def status_data(qc_object: Dict[str, Any], gear_name: str) -> Optional[Literal["pass", "fail"]]:
+    """Returns the QC status in the QC metadata.
+    
+    Args:
+      qc_object: the QC metadata (file.info.qc)
+      gear_name: the name of the gear
+    Returns:
+      the QC status for the gear if set. None, otherwise.
+    """
+    status = validation_data(qc_object=qc_object, gear_name=gear_name).get("state")
+    if status is None:
+        return None
+    if status.lower() == "pass":
+        return "pass"
+    if status.lower() == "fail":
+        return "fail"
 
 
-def build_rows(file_object: Dict[str, Any]) -> List[Dict[str, Any]]:
+def build_rows(file_object: FileOutput) -> List[Dict[str, Any]]:
     """Builds a list of error table rows from the file dictionary object.
 
     Flattens in gear name, and error locations.
@@ -44,12 +70,12 @@ def build_rows(file_object: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     qc_object = qc_data(file_object)
     gear_names = set(qc_object.keys())
-    table = []
+    table: List[Dict[str, Any]] = []
     for gear_name in gear_names:
         for error in error_data(qc_object, gear_name):
-            loc = error.pop('location', {})
+            loc: Dict[str, Any] = error.pop('location', {}) # type: ignore
             if loc:
-                error.update(loc)
+                error.update(loc) # type: ignore
             table.append({
                 'name': file_object.name,
                 'id': file_object.id,
@@ -66,10 +92,10 @@ def get_error_data(project: Project) -> List[Dict[str, Any]]:
     Args:
       project: the flywheel project object
     """
-    project: Project = project.reload()
+    project_object: Project = project.reload()
     return [
         item for sl in [
-            build_rows(file) for file in project.files
+            build_rows(file) for file in project_object.files
             if file.info.get('qc', None)
         ] for item in sl
     ]
