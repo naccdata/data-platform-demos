@@ -8,7 +8,7 @@ Keep reading here for details on running the demonstrations.
 
 ## Reporting issues
 
-If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/data-platform-demos/issues) of this repository and either chime in on an issue or[create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/data-platform-demos/issues) of this repository and either chime in on an issue or [create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
 ## About the demos
 
@@ -19,7 +19,6 @@ There are some tasks (pulling participant identifiers and file upload errors) th
 Otherwise, the code here could be adapted to use in Jupyter notebooks or command line scripts.
 
 Please ask for help if something is unclear.
-
 
 ## Setting up demo environment
 
