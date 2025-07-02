@@ -2,7 +2,7 @@
 
 Demonstration code for working with the NACC Data Platform.
 
-See the [documenation](https://naccdata.github.io/data-platform-demos) for general guidance.
+See the [documentation](https://naccdata.github.io/data-platform-demos) for general guidance.
 
 Keep reading here for details on running the demonstrations.
 
@@ -135,7 +135,7 @@ will then build sdist and wheel distributions in the `dist` directory.
 
 ### Upload distribution
 
-1. Format the code in the respository with
+1. Format the code in the repository with
 
    ```bash
    pants fix ::
