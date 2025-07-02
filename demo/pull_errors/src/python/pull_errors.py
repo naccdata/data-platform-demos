@@ -84,7 +84,7 @@ def main():
     table = get_error_data(source_project)
 
     if not table:
-        log.info("no errors in project %s", source_project)
+        log.info("no errors in project %s", source_project.label)
         return
 
     # 6. Format data
