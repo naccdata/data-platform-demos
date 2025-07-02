@@ -16,6 +16,7 @@ Otherwise, the code here could be adapted someone familiar with Python or R to u
 
 2. Accessing tabular data views (Python SDK)
    - [Pulling upload errors](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_errors)
+   - [Pulling QC status](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_status)
    - [Pulling participant identifiers](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_identifiers)
 
 ## NACC-Common Python package
