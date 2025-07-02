@@ -39,8 +39,6 @@ search_path = ["<PATH>", "<PYENV>"]
 use_rust_parser = true
 
 [update-build-files]
-formatter="yapf"
+formatter="ruff"
 
-[bandit]
-args = ["--quiet"]
 
