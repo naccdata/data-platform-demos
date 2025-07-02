@@ -31,7 +31,9 @@
             "extensions": [
                 "ms-python.python",
                 "ms-azuretools.vscode-docker",
-                "yzhang.markdown-all-in-one"
+                "streetsidesoftware.code-spell-checker",                
+                "yzhang.markdown-all-in-one",
+                "charliermarsh.ruff"
             ]
         }
     }
