@@ -174,7 +174,7 @@ pip3 install nacc_common-<version>-py3-none-any.whl
 2. Create and push the tag
 
    ```bash
-   VERSION="v<current-version>"
+   export VERSION="v<current-version>"
    git tag -a "$VERSION" -m "Data Platform demos $VERSION"
    git push --tags
    ```
