@@ -2,13 +2,13 @@
 
 Demonstration code for working with the NACC Data Platform.
 
-See the [documenation](https://naccdata.github.io/data-platform-demos) for general guidance.
+See the [documentation](https://naccdata.github.io/data-platform-demos) for general guidance.
 
 Keep reading here for details on running the demonstrations.
 
 ## Reporting issues
 
-If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/data-platform-demos/issues) of this repository and either chime in on an issue or[create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
+If you run into a problem with the demo, please see the [Issues page](https://github.com/naccdata/data-platform-demos/issues) of this repository and either chime in on an issue or [create a new one](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue).
 
 ## About the demos
 
@@ -22,18 +22,22 @@ Please ask for help if something is unclear.
 
 ## Table of Contents
 
-* [Setting up demo environment](#setting-up-demo-environment)
-    * [Python environment](#python-environment)
-    * [Using Pants](#using-pants)
-* [API key](#api-key)
-    * [Finding your API key](#finding-your-api-key)
-    * [Storing your API key](#storing-your-api-key)
-* [Demos](#demos)
-    * [Developer guide](#developer-guide)
-        * [Setup](#setup)
-        * [Building a distribution](#building-a-distribution)
-        * [Installing a distribution](#installing-a-distribution)
-        * [Uploading a distribution](#Uploading-a-distribution)
+- [Data Platform Demonstration Code](#data-platform-demonstration-code)
+  - [Reporting issues](#reporting-issues)
+  - [About the demos](#about-the-demos)
+  - [Table of Contents](#table-of-contents)
+  - [Setting up demo environment](#setting-up-demo-environment)
+    - [Python environment](#python-environment)
+    - [Using Pants](#using-pants)
+  - [API key](#api-key)
+    - [Finding your API key](#finding-your-api-key)
+    - [Storing your API key](#storing-your-api-key)
+  - [Demos](#demos)
+  - [Developer guide](#developer-guide)
+    - [Setup](#setup)
+    - [Building a distribution](#building-a-distribution)
+    - [Installing a distribution](#installing-a-distribution)
+    - [Uploading a distribution](#uploading-a-distribution)
 
 ## Setting up demo environment
 
@@ -159,7 +163,7 @@ pip3 install nacc_common-<version>-py3-none-any.whl
 
 ### Uploading a distribution
 
-1. Format the code in the respository with
+1. Format the code in the repository with
 
    ```bash
    pants fix ::

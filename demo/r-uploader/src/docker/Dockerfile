@@ -25,9 +25,8 @@ WORKDIR ${SCRIPT_DIR}
 COPY --from=builder /build/wheels /wheels
 COPY --from=builder /build/requirements.txt .
 
-RUN pip install --no-cache /wheels/*
-
-RUN R -e "install.packages(c('reticulate'))"
+RUN pip install --no-cache-dir /wheels/* \
+ && R -e "install.packages(c('reticulate'))"
 
 COPY demo/r-uploader/src/r/uploader/uploader.R .
 

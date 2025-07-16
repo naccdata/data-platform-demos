@@ -16,6 +16,7 @@ Otherwise, the code here could be adapted someone familiar with Python or R to u
 
 2. Accessing tabular data views (Python SDK)
    - [Pulling upload errors](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_errors)
+   - [Pulling QC status](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_status)
    - [Pulling participant identifiers](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_identifiers)
 
 ## NACC-Common Python package
@@ -24,6 +25,16 @@ The `common` directory of the [demo repository](https://github.com/naccdata/data
 Using these functions can help you avoid situations where data organization might be changed.
 
 Distributions can be accessed via each [release](https://github.com/naccdata/data-platform-demos/releases) on GitHub.
+
+You can use the release directly by referencing the release files in your package manager.
+For instance, adding the following line to `requirements.txt` for use with pip
+
+```text
+nacc-common@ https://github.com/naccdata/data-platform-demos/releases/download/v1.0.2/nacc_common-1.0.2-py3-none-any.whl
+```
+
+will include the 1.0.2 release of the package (as a wheel distribution) as a dependency.
+The format of the URL stays consistent, so to use a newer version of the package replace the version number.
 
 ## About Data Platform and pipelines
 

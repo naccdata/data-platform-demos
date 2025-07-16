@@ -9,7 +9,9 @@ RUN apt-get update \
          ca-certificates \
          sqlite3 \
          tzdata \
-         unzip
+         unzip \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 ENV SCRIPT_DIR=/script
 RUN mkdir ${SCRIPT_DIR} \

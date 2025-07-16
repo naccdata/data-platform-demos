@@ -1,6 +1,6 @@
-# Pulling pipeline file errors
+# Pulling pipeline file QC status
 
-This example is a Python script that uses the `error_data.get_error_data` function from `nacc-common` package to pull error data from a pipeline project.
+This example is a Python script that uses the `error_data.get_status_data` function from the `nacc_common` package to pull error data from a pipeline project.
 
 Follow the steps in the [top-level README](../../README.md#setting-up-demo-environment) for getting started.
 
@@ -11,7 +11,7 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 The demo can be run using Pants with the command
 
 ```bash
-pants run demo/pull_errors/src/python/pull_errors.py -- --adcid 0 --datatype enrollment --pipeline sandbox
+pants run demo/pull_status/src/python/pull_status.py -- --adcid 0 --datatype enrollment --pipeline sandbox
 ```
 
 which will create a file `errors-sandbox-enrollment-<date>.csv` in the top level directory.
@@ -26,4 +26,4 @@ And, to submit actual data set `--pipeline ingest`.
 ## About pulling errors
 
 NACC and Flywheel have agreed upon a standard format for error metadata that is captured when files are processed.
-The `error_data.get_error_data()` function gathers this metadata and returns it as a `List[Dict[str,Any]]` object that can be used to write the data as a table.
+The `error_data.get_status_data()` function gathers this metadata and returns it as a `List[Dict[str,Any]]` object that can be used to write the data as a table.

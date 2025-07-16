@@ -11,5 +11,6 @@ python_distribution(
         description="NACC Data Platform utilities",
         author="NACC",
         author_email="nacchelp@uw.edu",
-        url="https://github.com/naccdata/data-platform-demos"),
+        url="https://github.com/naccdata/data-platform-demos",
+    ),
 )
