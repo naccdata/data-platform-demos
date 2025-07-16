@@ -79,6 +79,8 @@ def status_data(
     if status.lower() == "fail":
         return "fail"
 
+    return None
+
 
 def build_qc_rows(
     file_object: FileOutput,
