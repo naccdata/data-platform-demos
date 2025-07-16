@@ -3,6 +3,7 @@ FROM python:3.11
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 
+# hadolint ignore=DL3008
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
          curl \
