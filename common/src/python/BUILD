@@ -7,7 +7,7 @@ python_distribution(
     sdist=True,
     provides=python_artifact(
         name="nacc-common",
-        version="1.0.2",
+        version="1.1.1",
         description="NACC Data Platform utilities",
         author="NACC",
         author_email="nacchelp@uw.edu",
