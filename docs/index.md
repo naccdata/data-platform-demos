@@ -21,22 +21,24 @@ Otherwise, the code here could be adapted someone familiar with Python or R to u
 
 ## NACC-Common Python package
 
-The `common` directory of the [demo repository](https://github.com/naccdata/data-platform-demos) contains a package of utilities used in the demo code.
+These demos use the [`nacc-common`](https://github.com/naccdata/nacc-common) Python package which defines utilities that can be used in scripts accessing center data in Flywheel.
 Using these functions can help you avoid situations where data organization might be changed.
 
-Distributions can be accessed via each [release](https://github.com/naccdata/data-platform-demos/releases) on GitHub.
+Distributions can be accessed via each [release](https://github.com/naccdata/nacc-common/releases) on GitHub.
 
 You can use the release directly by referencing the release files in your package manager.
 For instance, adding the following line to `requirements.txt` for use with pip
 
 ```text
-nacc-common@ https://github.com/naccdata/data-platform-demos/releases/download/v1.0.2/nacc_common-1.0.2-py3-none-any.whl
+nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.1.2/nacc_common-1.1.2-py3-none-any.whl
 ```
 
-will include the 1.0.2 release of the package (as a wheel distribution) as a dependency.
+will include the 1.1.2 release of the package (as a wheel distribution) as a dependency.
 The format of the URL stays consistent, so to use a newer version of the package replace the version number.
 
-## About Data Platform and pipelines
+> Older releases of this package are in the [demo repository](https://github.com/naccdata/data-platform-demos).
+
+## About the Data Platform and pipelines
 
 It is helpful for most of these tutorials to understand how data is organized within the NACC Data Platform.
 
@@ -57,4 +59,4 @@ The group and projects IDs and labels are used in uploading and accessing data w
 For instance, the form ingest project in the NACC Sample Center, is referenced as `sample-center/ingest-form`.
 
 The demo code includes utility functions that help build these references.
-The function `center_info.get_center_id()` in the common package returns the group ID when given a center's ADCID (the numeric ID used on form submissions), and `pipeline.get_project()` constructs the project label for a pipeline project.
+The function `center_info.get_center_id()` in the nacc-common package returns the group ID when given a center's ADCID (the numeric ID used on form submissions), and `pipeline.get_project()` constructs the project label for a pipeline project.

@@ -9,11 +9,11 @@ if(api_key == "") {
 client <- flywheel$Client(api_key)
 
 adcid <- '0'
-center_info <- import("center_info")
+center_info <- import("nacc_common.center_info")
 group_id <- center_info$get_center_id(client, adcid)
 message(sprintf("Group ID for ADCID %s is %s", adcid, group_id))
 
-pipeline <- import("pipeline")
+pipeline <- import("nacc_common.pipeline")
 upload_project <- tryCatch(
     pipeline$get_project(client=client, group_id=group_id, datatype='form', pipeline_type='sandbox', study_id='adrc'),
     error = function(e){

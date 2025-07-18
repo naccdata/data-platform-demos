@@ -8,10 +8,10 @@ import sys
 from csv import DictWriter
 from datetime import date
 
-from center_info import get_center_id
-from error_data import ERROR_HEADER_NAMES, get_error_data
+from nacc_common.center_info import get_center_id, CenterError
+from nacc_common.error_data import ERROR_HEADER_NAMES, get_error_data
 from flywheel import Client
-from pipeline import get_project
+from nacc_common.pipeline import get_project
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("__main__")
@@ -70,7 +70,12 @@ def main():
         sys.exit(1)
 
     # 3. Get the Flywheel group ID for the center by the ADCID.
-    group_id = get_center_id(client=client, adcid=str(args.adcid))
+    try:
+        group_id = get_center_id(client=client, adcid=str(args.adcid))
+    except CenterError as error:
+        log.error(str(error))
+        sys.exit(1)
+
     log.info("Group ID for ADCID %s is %s", args.adcid, group_id)
 
     # 4. Get the pipeline project

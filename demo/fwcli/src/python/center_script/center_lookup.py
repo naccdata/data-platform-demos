@@ -5,7 +5,7 @@ import logging
 import os
 import sys
 
-from center_info import get_center_id
+from nacc_common.center_info import get_center_id, CenterError
 from flywheel import Client
 
 log = logging.getLogger("__main__")
@@ -28,7 +28,12 @@ def main():
         log.error("not connected to Flywheel")
         sys.exit(1)
 
-    center_id = get_center_id(client=client, adcid=str(args.adcid))
+    try:
+        center_id = get_center_id(client=client, adcid=str(args.adcid))
+    except CenterError as error:
+        log.error(str(error))
+        sys.exit(1)
+
     if center_id:
         print(center_id)
 
