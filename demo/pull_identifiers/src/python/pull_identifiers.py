@@ -7,9 +7,9 @@ import os
 import sys
 from datetime import date
 
-from center_info import get_center_id
+from nacc_common.center_info import get_center_id, CenterError
 from flywheel import Client
-from pipeline import get_project, get_published_view
+from nacc_common.pipeline import get_project, get_published_view
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("__main__")
@@ -58,12 +58,16 @@ def main():
         log.error("not connected to Flywheel")
         sys.exit(1)
 
-    # 3. Get the dataview ID for participant identifiers
+    # 3. Get the dataview ID for participant identifiers. (Yes, the view name is misspelled.)
     view_id = get_published_view(client=client, label="center-participant-identifers")
 
     # 4. Get the Flywheel group ID for the center by the ADCID.
     #    This hardcodes the NACC Sample Center, and will have to be changed
-    group_id = get_center_id(client=client, adcid=str(args.adcid))
+    try:
+        group_id = get_center_id(client=client, adcid=str(args.adcid))
+    except CenterError as error:
+        log.error(str(error))
+        sys.exit(1)
     log.info("Group ID for ADCID %s is %s", args.adcid, group_id)
 
     # 4. Get the enrollment form sandbox pipeline project

@@ -6,7 +6,7 @@ import os
 import sys
 
 from flywheel import Client
-from pipeline import get_project
+from nacc_common.pipeline import get_project
 
 log = logging.getLogger("__main__")
 
