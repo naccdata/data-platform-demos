@@ -66,7 +66,7 @@ Once you have a Python 3.11 environment, install the [Pants build system](pantsb
 
 The full installation will occur the first time you run a pants command.
 
-Pants is used because it makes managing dependencies easier, however, it does only run in [Unix/Linux environments](https://www.pantsbuild.org/2.21/docs/getting-started/prerequisites).
+Pants is used because it makes managing dependencies easier, however, it does only run in [Unix/Linux environments](https://www.pantsbuild.org/stable/docs/getting-started/prerequisites).
 
 If you don't want to use Pants, keep in mind that it may be sufficient for you to look at the code, and adapt it to your environment.
 And, of course, you are welcome to change your copy of the repository.
