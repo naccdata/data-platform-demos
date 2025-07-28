@@ -30,10 +30,10 @@ You can use the release directly by referencing the release files in your packag
 For instance, adding the following line to `requirements.txt` for use with pip
 
 ```text
-nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.1.2/nacc_common-1.1.2-py3-none-any.whl
+nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.2.4/nacc_common-1.2.4-py3-none-any.whl
 ```
 
-will include the 1.1.2 release of the package (as a wheel distribution) as a dependency.
+will include the 1.2.4 release of the package (as a wheel distribution) as a dependency.
 The format of the URL stays consistent, so to use a newer version of the package replace the version number.
 
 > Older releases of this package are in the [demo repository](https://github.com/naccdata/data-platform-demos).
