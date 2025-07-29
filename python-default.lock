@@ -10,7 +10,7 @@
 //   ],
 //   "generated_with_requirements": [
 //     "flywheel-sdk>=18.0.0",
-//     "nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.2.4/nacc_common-1.2.4-py3-none-any.whl"
+//     "nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.2.5/nacc_common-1.2.5-py3-none-any.whl"
 //   ],
 //   "manylinux": "manylinux2014",
 //   "requirement_constraints": [],
@@ -168,16 +168,16 @@
           "artifacts": [
             {
               "algorithm": "sha256",
-              "hash": "46f8b9f231e21c8e0d9ff7cc4cc82d203bfd7b00a05baa28c3a6b5f306969c6e",
-              "url": "https://github.com/naccdata/nacc-common/releases/download/v1.2.4/nacc_common-1.2.4-py3-none-any.whl"
+              "hash": "cd5deae1822faa5ff88402f32acffa2671203797133a3ecca45bd2a710024bcc",
+              "url": "https://github.com/naccdata/nacc-common/releases/download/v1.2.5/nacc_common-1.2.5-py3-none-any.whl"
             }
           ],
           "project_name": "nacc-common",
           "requires_dists": [
             "flywheel-sdk>=18.0.0"
           ],
-          "requires_python": "==3.11.*",
-          "version": "1.2.4"
+          "requires_python": ">=3.9",
+          "version": "1.2.5"
         },
         {
           "artifacts": [

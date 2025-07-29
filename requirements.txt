@@ -1,2 +1,2 @@
 flywheel-sdk>=18.0.0
-nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.2.4/nacc_common-1.2.4-py3-none-any.whl
+nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.2.5/nacc_common-1.2.5-py3-none-any.whl
