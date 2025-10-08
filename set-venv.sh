@@ -1,6 +1,8 @@
 #!/bin/sh
+API_KEY=`grep "FW_API_KEY" .env`
 ROOTS=$(pants roots)
 python3 -c "print('PYTHONPATH=\"./' + ':./'.join('''${ROOTS}'''.split('\n')) + ':\$PYTHONPATH\"')" > .env
+echo $API_KEY >> .env
 
 if [ ! -e python-default.lock ]; then
     pants generate-lockfiles
