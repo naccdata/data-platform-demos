@@ -21,7 +21,7 @@ Otherwise, the code here could be adapted someone familiar with Python or R to u
 
 ## NACC-Common Python package
 
-These demos use the [`nacc-common`](https://github.com/naccdata/nacc-common) Python package which defines utilities that can be used in scripts accessing center data in Flywheel.
+These demos use the [`nacc-common`](https://github.com/naccdata/flywheel-gear-extensions/tree/main/nacc-common) Python package which defines utilities that can be used in scripts accessing center data in Flywheel.
 Using these functions can help you avoid situations where data organization might be changed.
 
 Distributions can be accessed via each [release](https://github.com/naccdata/nacc-common/releases) on GitHub.
@@ -30,13 +30,13 @@ You can use the release directly by referencing the release files in your packag
 For instance, adding the following line to `requirements.txt` for use with pip
 
 ```text
-nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v1.2.4/nacc_common-1.2.4-py3-none-any.whl
+nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v2.0.0/nacc_common-2.0.0-py3-none-any.whl
 ```
 
-will include the 1.2.4 release of the package (as a wheel distribution) as a dependency.
+will include the 2.0.0 release of the package (as a wheel distribution) as a dependency.
 The format of the URL stays consistent, so to use a newer version of the package replace the version number.
 
-> Older releases of this package are in the [demo repository](https://github.com/naccdata/data-platform-demos).
+> Older releases of this package in the [demo repository](https://github.com/naccdata/data-platform-demos) likely will not work with updates to the data in the NACC Data Platform.
 
 ## About the Data Platform and pipelines
 
@@ -51,6 +51,7 @@ The list of projects you see will depend on your authorizations, but may include
 These are the ingest pipeline projects, and are labeled by the datatype each is configured to handle.
 You may also see an `accepted` project, which is where data that has passed QC can be accessed.
 Each `ingest-` project has a corresponding `sandbox-` project for practice submissions.
+(Eventually, we expect to also make UDSv3 data from the legacy NACC system accessible via a project named `retrospective-form`.)
 
 You may also have projects that look like `ingest-form-leads`, or if your center was part of the UDSv4 Pilot a project like `ingest-form-udsv4pilot`.
 These are pipelines that are dedicated to particular studies (other than the ADRC program) or purposes (such as the pilot).
