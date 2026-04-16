@@ -12,7 +12,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "hypothesis",
     "mypy",
+    "pytest",
     "ruff",
 ]
 

@@ -11,6 +11,9 @@ format:
 check:
 	uv run mypy demo/ --ignore-missing-imports
 
+test:
+	uv run pytest tests/ -v
+
 # Build Docker images
 build-python-uploader:
 	docker build -f demo/python-uploader/Dockerfile -t naccdata/python-uploader .
