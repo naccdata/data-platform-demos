@@ -25,3 +25,5 @@ jobs:
       run: uv run ruff check demo/
     - name: Type check
       run: uv run mypy demo/ --ignore-missing-imports
+    - name: Test
+      run: uv run pytest tests/ -v
