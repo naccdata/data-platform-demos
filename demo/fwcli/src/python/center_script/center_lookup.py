@@ -8,6 +8,7 @@ import sys
 from nacc_common.center_info import get_center_id, CenterError
 from flywheel import Client
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("__main__")
 
 
@@ -15,7 +16,7 @@ def main():
     """Lookup the FW group ID using the center ADCID."""
     parser = argparse.ArgumentParser(description="Lookup center group")
     parser.add_argument(
-        "adcid", help="the center group name", type=int, choices=range(0, 100)
+        "adcid", help="the ADCID for your center (0-99)", type=int, choices=range(0, 100)
     )
     args = parser.parse_args()
 

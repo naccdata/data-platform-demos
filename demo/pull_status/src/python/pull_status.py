@@ -1,3 +1,6 @@
+"""Example script for pulling QC status from a pipeline project on NACC Data
+Platform."""
+
 import argparse
 import logging
 import os
@@ -23,12 +26,12 @@ def main():
     # 0. The argument parser is used to allow running the script from the
     #    command line.
     parser = argparse.ArgumentParser(
-        description="Pull file errors for pipeline project"
+        description="Pull QC status for pipeline project"
     )
     parser.add_argument(
         "-a",
         "--adcid",
-        help="the center group name",
+        help="the ADCID for your center (0-99)",
         type=int,
         choices=range(0, 100),
         required=True,
@@ -49,6 +52,12 @@ def main():
     )
     parser.add_argument(
         "-s", "--studyid", help="the study ID (default: adrc)", default="adrc"
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="output file path (default: qc-status-<project>-<date>.csv)",
+        default=None,
     )
     args = parser.parse_args()
 
@@ -90,12 +99,16 @@ def main():
     # 5. Get QC status from project
     table = get_status_data(source_project)
     if not table:
-        log.info("no errors in project %s", source_project.label)
+        log.info("no status data in project %s", source_project.label)
         return
 
     # 6. Format data
+    output_path = (
+        args.output
+        or f"qc-status-{source_project.label}-{date.today()}.csv"
+    )
     with open(
-        f"qc-status-{source_project.label}-{date.today()}.csv",
+        output_path,
         mode="w",
         encoding="utf-8",
     ) as out_file:

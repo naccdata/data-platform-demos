@@ -8,6 +8,7 @@ import sys
 from flywheel import Client
 from nacc_common.pipeline import get_project
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("__main__")
 
 

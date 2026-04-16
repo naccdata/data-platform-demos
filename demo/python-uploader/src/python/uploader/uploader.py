@@ -25,7 +25,7 @@ def main():
     parser.add_argument(
         "-a",
         "--adcid",
-        help="the center group name",
+        help="the ADCID for your center (0-99)",
         type=int,
         choices=range(0, 100),
         required=True,

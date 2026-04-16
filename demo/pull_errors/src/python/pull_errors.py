@@ -1,5 +1,5 @@
-"""Example script for querying identifiers from an enrollment pipeline on NACC
-Data Platform."""
+"""Example script for pulling file errors from a pipeline project on NACC Data
+Platform."""
 
 import argparse
 import logging
@@ -18,8 +18,7 @@ log = logging.getLogger("__main__")
 
 
 def main():
-    """Queries the enrollment pipeline dataviews available on the NACC Data
-    Platform.
+    """Pull file errors from a pipeline project on the NACC Data Platform.
 
     Uses Flywheel instance determined by the API key value set in
     FW_API_KEY.
@@ -32,7 +31,7 @@ def main():
     parser.add_argument(
         "-a",
         "--adcid",
-        help="the center group name",
+        help="the ADCID for your center (0-99)",
         type=int,
         choices=range(0, 100),
         required=True,
@@ -53,6 +52,12 @@ def main():
     )
     parser.add_argument(
         "-s", "--studyid", help="the study ID (default: adrc)", default="adrc"
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="output file path (default: errors-<project>-<date>.csv)",
+        default=None,
     )
     args = parser.parse_args()
 
@@ -100,9 +105,11 @@ def main():
         return
 
     # 6. Format data
-    with open(
-        f"errors-{source_project.label}-{date.today()}.csv", mode="w", encoding="utf-8"
-    ) as out_file:
+    output_path = (
+        args.output
+        or f"errors-{source_project.label}-{date.today()}.csv"
+    )
+    with open(output_path, mode="w", encoding="utf-8") as out_file:
         writer = DictWriter(out_file, fieldnames=ERROR_HEADER_NAMES, dialect="unix")
         writer.writeheader()
         writer.writerows(table)
