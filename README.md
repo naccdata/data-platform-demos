@@ -14,7 +14,7 @@ If you run into a problem with the demo, please see the [Issues page](https://gi
 
 These demos are meant to provide examples for people who are familiar with developing software.
 
-If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data. 
+If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data.
 There are some tasks (pulling participant identifiers and file upload errors) that cannot be done with the CLI, but are supported by the ADRC portals.
 Otherwise, the code here could be adapted to use in Jupyter notebooks or command line scripts.
 
@@ -36,7 +36,7 @@ Please ask for help if something is unclear.
 
 ## Setting up demo environment
 
-> This demo uses the [Pants build system](pantsbuild.org), and assumes a Unix/Linux environment. 
+> This demo uses the [Pants build system](pantsbuild.org), and assumes a Unix/Linux environment.
 > Windows can use [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
 > See the [pants requirements](https://www.pantsbuild.org/2.21/docs/getting-started/prerequisites).
 
@@ -85,7 +85,7 @@ To get the API key, login as the user to the NACC Flywheel instance.
 3. Under "Flywheel Access" at the bottom of the resulting page, click "Generate API Key".
 4. Choose a key name relevant to upload, set the expiration date, and create the API Key.
 5. Copy the API Key since you wont be able to access the value later.
-6. Keep the key secret  
+6. Keep the key secret
 
 ### Storing your API key
 
@@ -95,7 +95,7 @@ For this particular demo, we are storing the API key in a `.env` file.
 > Take care to protect your key like any other secret in your work environment.
 > A deployment should use more robust secret management to ensure the secret is not easily accessible.
 
-Run the command 
+Run the command
 
 ```bash
 touch .env
@@ -111,9 +111,9 @@ FW_API_KEY=<the value of the API key>
 
 ## Demos
 
-- [Python uploader](demo/python-uploader/README.md).
-- [R uploader](demo/r-uploader/README.md).
-- [CLI uploader](demo/fwcli/README.md).
+- [Python uploader](demo/python-uploader/README.md)
+- [R uploader](demo/r-uploader/README.md)
+- [CLI uploader](demo/fwcli/README.md)
 - [Python error puller](demo/pull_errors/README.md)
 - [Python status puller](demo/pull_status/README.md)
 - [Python identifier puller](demo/pull_identifiers/README.md)
