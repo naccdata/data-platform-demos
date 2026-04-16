@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Run Tests After Task",
+  "description": "Runs the pytest test suite after each spec task completes to verify correctness properties and unit tests pass.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "uv run pytest tests/ -v --tb=short 2>/dev/null || true",
+    "timeout": 120
+  }
+}

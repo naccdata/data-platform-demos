@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Lint & Type Check After Task",
+  "description": "Runs ruff linting and mypy type checking after each spec task completes to catch style and type issues early.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "uv run ruff check demo/ && uv run mypy demo/ --ignore-missing-imports",
+    "timeout": 120
+  }
+}
