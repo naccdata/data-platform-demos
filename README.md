@@ -85,25 +85,23 @@ To get the API key, login as the user to the NACC Flywheel instance.
 
 ### Storing your API key
 
-For this particular demo, we are storing the API key in a `.env` file.
+The demo scripts look for your API key in this order:
 
-> Note: The `.gitignore` is set to ignore this file, which helps prevent the key value from being checked into the repository.
-> Take care to protect your key like any other secret in your work environment.
-> A deployment should use more robust secret management to ensure the secret is not easily accessible.
+1. **`--api-key` flag** — pass it directly on the command line
+2. **`FW_API_KEY` environment variable** — loaded automatically from a `.env` file if present
+3. **System keyring** — macOS Keychain, Windows Credential Locker, or Linux Secret Service
+4. **Interactive prompt** — if none of the above are found and you're in a terminal, you'll be prompted; the key is then stored in the system keyring for next time
 
-Run the command
+The simplest approach for repeated use is to run a script once and enter your key when prompted. It will be saved in your OS keyring automatically.
 
-```bash
-touch .env
-```
-
-and then edit the file to add your key in a line like
+Alternatively, create a `.env` file:
 
 ```bash
-FW_API_KEY=<the value of the API key>
+echo "FW_API_KEY=<the value of the API key>" > .env
 ```
 
-> The `.env` file is included in the `.gitignore` file intentionally to prevent inclusion of the API token in a Git repository.
+> The `.gitignore` is set to ignore `.env` to prevent the key from being checked into the repository.
+> For production use, prefer the system keyring or a dedicated secret manager over plaintext files.
 
 ## Demos
 

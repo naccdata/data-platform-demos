@@ -3,28 +3,26 @@ Platform."""
 
 import argparse
 import logging
-import os
 import sys
 from csv import DictWriter
 from datetime import date
+from pathlib import Path
 
-from nacc_common.center_info import get_center_id, CenterError
-from nacc_common.error_data import STATUS_HEADER_NAMES, get_status_data
-from flywheel import Client
-from nacc_common.pipeline import get_project
+# Allow importing the shared helper from demo/common/
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "common"))
+
+from fw_auth import get_api_key  # noqa: E402
+from nacc_common.center_info import get_center_id, CenterError  # noqa: E402
+from nacc_common.error_data import STATUS_HEADER_NAMES, get_status_data  # noqa: E402
+from flywheel import Client  # noqa: E402
+from nacc_common.pipeline import get_project  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("__main__")
 
 
 def main():
-    """Queries the QC status of the the files.
-
-    Uses Flywheel instance determined by the API key value set in
-    FW_API_KEY.
-    """
-    # 0. The argument parser is used to allow running the script from the
-    #    command line.
+    """Pull QC status from a pipeline project on the NACC Data Platform."""
     parser = argparse.ArgumentParser(
         description="Pull QC status for pipeline project"
     )
@@ -59,17 +57,16 @@ def main():
         help="output file path (default: qc-status-<project>-<date>.csv)",
         default=None,
     )
+    parser.add_argument(
+        "-k", "--api-key", help="Flywheel API key (default: from env or keyring)"
+    )
     args = parser.parse_args()
 
-    # 1. The Flywheel SDK uses a Client object to interact with Flywheel.
-    #    First get the API key from the environment variable FW_API_KEY
-    if "FW_API_KEY" not in os.environ:
-        log.error("environment variable FW_API_KEY not found")
-        sys.exit(1)
+    # 1. Get the API key (CLI flag > env var > keyring > prompt)
+    api_key = get_api_key(args.api_key)
 
     # 2. Create the Client object using the API key.
-    #    The key determines which instance you are using.
-    client = Client(os.environ["FW_API_KEY"])
+    client = Client(api_key)
     if not client:
         log.error("not connected to Flywheel")
         sys.exit(1)
@@ -91,7 +88,7 @@ def main():
         study_id=args.studyid,
     )
     if not source_project:
-        log.error("No enrollment sandbox project found for center: %s", group_id)
+        log.error("No project found for center: %s", group_id)
         sys.exit(1)
 
     log.info("Using project %s/%s", source_project.group, source_project.label)
@@ -104,14 +101,9 @@ def main():
 
     # 6. Format data
     output_path = (
-        args.output
-        or f"qc-status-{source_project.label}-{date.today()}.csv"
+        args.output or f"qc-status-{source_project.label}-{date.today()}.csv"
     )
-    with open(
-        output_path,
-        mode="w",
-        encoding="utf-8",
-    ) as out_file:
+    with open(output_path, mode="w", encoding="utf-8") as out_file:
         writer = DictWriter(out_file, fieldnames=STATUS_HEADER_NAMES, dialect="unix")
         writer.writeheader()
         writer.writerows(table)

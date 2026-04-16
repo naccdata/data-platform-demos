@@ -1,4 +1,6 @@
 # Runtime dependencies for Docker builds.
 # For local development, use: uv sync
 flywheel-sdk>=20.0.0
+keyring>=25.0.0
 nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v3.0.0/nacc_common-3.0.0-py3-none-any.whl
+python-dotenv>=1.0.0
