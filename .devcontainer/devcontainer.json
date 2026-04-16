@@ -1,43 +1,50 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "Python 3",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	"features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            "version": "latest",
-            "enableNonRootDocker": true,
-            "moby": true
-        },
-        "ghcr.io/devcontainers/features/go:1": {}
+  "name": "NACC Data Platform Demos",
+  
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
     },
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "pip3 install --user -r requirements.txt",
-
-	// Configure tool-specific properties.
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "dev.containers.dockerCredentialHelper": false,
-                "editor.detectIndentation": false
-            },
-            "extensions": [
-                "ms-python.python",
-                "ms-azuretools.vscode-docker",
-                "streetsidesoftware.code-spell-checker",                
-                "yzhang.markdown-all-in-one",
-                "charliermarsh.ruff"
-            ]
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "1.5"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "hashicorp.terraform",
+        "pantsbuild.pants"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.ruffEnabled": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+          }
         }
+      }
     }
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+  },
+  
+  "onCreateCommand": "sudo rm -f /etc/apt/sources.list.d/yarn.list || true",
+  
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  
+  "remoteUser": "vscode"
 }
