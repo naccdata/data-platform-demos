@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # 1. Copy the Pex file for the uploader.
 COPY demo.python-uploader.src.python.uploader/bin.pex /bin/run

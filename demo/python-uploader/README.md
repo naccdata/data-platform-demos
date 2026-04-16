@@ -56,7 +56,7 @@ This is should allow the Docker demo to run even on Apple silicon Macs because t
 However, if you want to use have a Pex file specific to Apple silicon, you need to edit the BUILD file to remove the line
 
 ```python
-           complete_platforms=["//:linux_x86_py311"],
+           complete_platforms=["//:linux_x86_py312"],
 ```
 
 from the `pex_binary()` configuration.

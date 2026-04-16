@@ -3,5 +3,5 @@ python_sources(
 )
 
 pex_binary(
-    name="bin", complete_platforms=["//:linux_x86_py311"], entry_point="uploader.py"
+    name="bin", complete_platforms=["//:linux_x86_py312"], entry_point="uploader.py"
 )

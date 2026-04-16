@@ -4,6 +4,6 @@ python_sources(
 
 pex_binary(
     name="bin",
-    complete_platforms=["//:linux_x86_py311"],
+    complete_platforms=["//:linux_x86_py312"],
     entry_point="pipeline_lookup.py",
 )

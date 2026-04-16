@@ -1,4 +1,4 @@
-FROM python:3.11 as builder
+FROM python:3.12 as builder
 
 ENV BUILD_DIR=/build
 RUN mkdir ${BUILD_DIR}
@@ -10,7 +10,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /build/wheels -r requirements
 COPY nacc_common-*-py3-none-any.whl ./wheels
 
 ###
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # hadolint ignore=DL3008
 RUN apt-get update \

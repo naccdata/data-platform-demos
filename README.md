@@ -44,7 +44,7 @@ You'll first need to [clone this repository](https://docs.github.com/en/reposito
 
 ### Python environment
 
-You will need a Python 3.11 interpreter installed.
+You will need a Python 3.12 interpreter installed.
 
 The simplest approach may to be to [install Python](https://www.python.org/downloads/).
 
@@ -58,7 +58,7 @@ Once Docker is started, in VSCode click the green bar at the bottom left and cho
 
 ### Using Pants
 
-Once you have a Python 3.11 environment, install the [Pants build system](pantsbuild.org) by running the command
+Once you have a Python 3.12 environment, install the [Pants build system](pantsbuild.org) by running the command
 
    ```bash
    bash get-pants.sh
