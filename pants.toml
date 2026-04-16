@@ -1,5 +1,5 @@
 [GLOBAL]
-pants_version = "2.28.0"
+pants_version = "2.29.0"
 backend_packages = [
     "pants.backend.build_files.fmt.ruff",
     "pants.backend.docker",
@@ -27,7 +27,7 @@ root_patterns = [
 default_repository = "naccdata/{name}"
 
 [python]
-interpreter_constraints = ["==3.11.*"]
+interpreter_constraints = ["==3.12.*"]
 enable_resolves = true
 resolves = { python-default = "python-default.lock"}
 
