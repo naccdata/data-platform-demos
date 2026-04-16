@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Confirm the API key environment variable is set
-if [ -z ${FW_API_KEY+x} ]; then 
-    echo "ERROR: FW_API_KEY is not set"; 
+if [ -z ${FW_API_KEY+x} ]; then
+    echo "ERROR: FW_API_KEY is not set";
     exit 1
 fi
 
@@ -12,6 +12,12 @@ if [ -z "$(ls -A /wd)" ]; then
    exit 1
 fi
 
+# Use environment variables with defaults for configuration
+ADCID=${ADCID:-0}
+DATATYPE=${DATATYPE:-form}
+PIPELINE=${PIPELINE:-sandbox}
+STUDYID=${STUDYID:-adrc}
+
 # 1. Login with FW CLI using environment variable FW_API_KEY
 if ! fw login ${FW_API_KEY}; then
     echo "ERROR: failed to login";
@@ -19,18 +25,18 @@ if ! fw login ${FW_API_KEY}; then
 fi
 
 # 2. Determine center group
-if ! CENTER=`center_lookup 0`; then
+if ! CENTER=$(center_lookup "${ADCID}"); then
     echo "ERROR: center lookup failed"
     exit 1
 fi
 echo "Using center: ${CENTER}"
 
 # 3. Determine pipeline
-if ! PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox -s adrc`; then
+if ! PIPELINE_LABEL=$(pipeline_lookup -c "${CENTER}" -d "${DATATYPE}" -p "${PIPELINE}" -s "${STUDYID}"); then
     echo "ERROR: pipeline lookup failed"
     exit 1
 fi
-echo "Using pipeline: ${PIPELINE}"
+echo "Using pipeline: ${PIPELINE_LABEL}"
 
 # 4. Upload single file
-fw upload /wd/form-data-dummyv1.csv fw://${CENTER}/${PIPELINE}
+fw upload /wd/form-data-dummyv1.csv "fw://${CENTER}/${PIPELINE_LABEL}"

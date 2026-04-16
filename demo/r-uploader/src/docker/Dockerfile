@@ -1,4 +1,4 @@
-FROM python:3.12 as builder
+FROM python:3.12 AS builder
 
 ENV BUILD_DIR=/build
 RUN mkdir ${BUILD_DIR}
