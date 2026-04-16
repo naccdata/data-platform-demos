@@ -90,8 +90,8 @@ def test_filter_by_ptids_retains_matching_records(
 
         # Order is preserved — indices in original list are monotonically increasing
         if result:
-            indices = [records.index(r) for r in result]
-            assert indices == sorted(indices)
+            indexed = [(i, r) for i, r in enumerate(records) if r.get("ptid") in ptids]
+            assert [r for _, r in indexed] == result
 
 
 # ---------------------------------------------------------------------------
