@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Ruff Format Check on Save",
+  "description": "Reminds the agent to check ruff formatting when a Python file in demo/ or tests/ is edited.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "demo/**/*.py",
+      "tests/**/*.py"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A Python file was edited. After you finish your current set of changes, run `uv run ruff format demo/ tests/` to ensure formatting is consistent. Only do this once when all edits are complete, not after every individual file save."
+  }
+}
