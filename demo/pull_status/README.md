@@ -25,6 +25,36 @@ You can specify a custom output path with `--output`:
 uv run demo/pull_status/pull_status.py --adcid 0 --output my-status.csv
 ```
 
+## Filtering results
+
+You can narrow the results by module name, participant ID, or both.
+
+**Filter by module** (`--module` or `-m`):
+
+```bash
+uv run demo/pull_status/pull_status.py --adcid 0 --module UDS
+```
+
+This retrieves QC status records for the UDS module only. Module names are case-insensitive and normalized to uppercase, so `--module uds` works the same way. You can specify multiple modules with commas (`--module UDS,LBD`) or by repeating the flag (`--module UDS --module LBD`).
+
+**Filter by participant ID** (`--ptid` or `-t`):
+
+```bash
+uv run demo/pull_status/pull_status.py --adcid 0 --ptid PT001,PT002
+```
+
+This retrieves QC status records for participants PT001 and PT002 only. PTID filtering is case-sensitive. You can also repeat the flag (`--ptid PT001 --ptid PT002`).
+
+**Combine filters**:
+
+```bash
+uv run demo/pull_status/pull_status.py --adcid 0 --module UDS --ptid PT001
+```
+
+This retrieves only UDS records for participant PT001. Filters can be combined freely.
+
+When filters are active and no `--output` path is given, the output filename automatically reflects the active filters (e.g., `qc-status-UDS-ptid-PT001-<project-label>-<date>.csv`).
+
 ## About pulling QC status
 
 NACC and Flywheel have agreed upon a standard format for QC status metadata that is captured when files are processed.
