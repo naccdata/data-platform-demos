@@ -1,6 +1,6 @@
 # Details for Using the CLI Uploader
 
-This example uses a Docker image to illustrate deploying a shell script using the FW CLI to upload a file from disk. 
+This example uses a Docker image to illustrate deploying a shell script using the FW CLI to upload a file from disk.
 You can use the CLI as a command, but this shows how the CLI could be used in a production setting.
 
 > This demo uses a Linux Docker container running on an x86 platform in order to use the Classic Flywheel CLI.
@@ -8,35 +8,18 @@ You can use the CLI as a command, but this shows how the CLI could be used in a 
 
 You will need [Docker](https://www.docker.com) installed to be able to run this demo.
 
->If you are running the VSCode Dev Container for the repo (see the [top-level README](../../README.md#python-environment)), then Docker is already installed.
+## Configuration
 
-## Setting the center and pipeline in the entrypoint script
+The entrypoint script reads the following environment variables (all have defaults):
 
-Before you can run this demo, you need to make a couple of changes in the file `demo/fwcli/src/docker/entrypoint.sh`.
+| Variable   | Default   | Description                          |
+|------------|-----------|--------------------------------------|
+| `ADCID`    | `0`       | The ADCID for your center (0-99)     |
+| `DATATYPE` | `form`    | The datatype (`form`, `enrollment`, `dicom`) |
+| `PIPELINE` | `sandbox` | The pipeline type (`sandbox`, `ingest`) |
+| `STUDYID`  | `adrc`    | The study ID                         |
 
-### To set the center
-
-In the line
-
-```bash
-CENTER=`center_lookup 0`
-```
-
-change the value `0` to the ADCID for your center.
-
-### To set the pipeline
-
-The line
-
-```bash
-PIPELINE=`pipeline_lookup -c ${CENTER} -d form -p sandbox -s adrc`
-```
-
-sets the pipeline name to `sandbox-form` after confirming the pipeline project exists for your center.
-In fact, you can remove the arguments following the center to get this using the defaults.
-To submit enrollment form data instead, change `-d form` to `-d enrollment`.
-
-> To submit actual data, change `-p sandbox` to `-p ingest`.
+To run for your center, pass `--env ADCID=<your-adcid>` to `docker run`.
 
 ## Running the demo
 
@@ -44,17 +27,23 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 
 > All the commands need to be run with the top-level directory of the repository as the working directory.
 
-1. First, build the Docker image with
+1. Build the Docker image:
 
-```bash
-pants package demo/fwcli/src/docker::
-```
+   ```bash
+   docker build -f demo/fwcli/Dockerfile --platform linux/amd64 -t naccdata/cli-uploader .
+   ```
 
-1. Second, run the example using the command
+2. Run the example:
 
-```bash
-docker run --platform linux/amd64 --volume ./data:/wd --env-file .env naccdata/cli-uploader
-```
+   ```bash
+   docker run --platform linux/amd64 --volume ./data:/wd --env-file .env naccdata/cli-uploader
+   ```
+
+   To run for your center, add `--env ADCID=42` (replacing `42` with your ADCID):
+
+   ```bash
+   docker run --platform linux/amd64 --volume ./data:/wd --env-file .env --env ADCID=42 naccdata/cli-uploader
+   ```
 
 Note this uploads the file `data/form-data-dummyv1.csv`.
 The argument `--volume ./data:/wd` indicates to Docker that you want `/wd` within the container to reference the `data` directory.

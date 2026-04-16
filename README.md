@@ -14,62 +14,55 @@ If you run into a problem with the demo, please see the [Issues page](https://gi
 
 These demos are meant to provide examples for people who are familiar with developing software.
 
-If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data. 
+If you are looking for solutions that run on the command-line, it is possible to use the [Flywheel CLI tool](https://docs.flywheel.io/CLI/) for uploading and downloading data.
 There are some tasks (pulling participant identifiers and file upload errors) that cannot be done with the CLI, but are supported by the ADRC portals.
 Otherwise, the code here could be adapted to use in Jupyter notebooks or command line scripts.
 
 Please ask for help if something is unclear.
 
-## Table of Contents
-
-- [Data Platform Demonstration Code](#data-platform-demonstration-code)
-  - [Reporting issues](#reporting-issues)
-  - [About the demos](#about-the-demos)
-  - [Table of Contents](#table-of-contents)
-  - [Setting up demo environment](#setting-up-demo-environment)
-    - [Python environment](#python-environment)
-    - [Using Pants](#using-pants)
-  - [API key](#api-key)
-    - [Finding your API key](#finding-your-api-key)
-    - [Storing your API key](#storing-your-api-key)
-  - [Demos](#demos)
-
 ## Setting up demo environment
-
-> This demo uses the [Pants build system](pantsbuild.org), and assumes a Unix/Linux environment. 
-> Windows can use [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
-> See the [pants requirements](https://www.pantsbuild.org/2.21/docs/getting-started/prerequisites).
 
 You'll first need to [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to your computer using Git.
 
 ### Python environment
 
-You will need a Python 3.11 interpreter installed.
+You will need a Python 3.12 interpreter installed.
 
-The simplest approach may to be to [install Python](https://www.python.org/downloads/).
+The simplest approach is to [install Python](https://www.python.org/downloads/).
 
-But, the repository is setup to use a VSCode Dev Container for Python.
-Getting this going from scratch requires installing [VSCode](https://code.visualstudio.com), [Docker](https://www.docker.com) and setting up [Dev Containers](https://code.visualstudio.com/docs/devcontainers/tutorial).
-This approach is not suggested unless you want to use the same environment we are using.
+### Installing uv
 
-Incidentally, when you open the repository with VSCode, it will prompt you to install and run the Dev Containers extension, which will in turn prompt you to install [Docker](https://www.docker.com).
-After Docker is installed you will have to start the Docker Desktop from your operating system.
-Once Docker is started, in VSCode click the green bar at the bottom left and choose "Reopen in Container".
+This project uses [uv](https://docs.astral.sh/uv/) to manage Python dependencies. Install it with:
 
-### Using Pants
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-Once you have a Python 3.11 environment, install the [Pants build system](pantsbuild.org) by running the command
+Then install the project dependencies:
 
-   ```bash
-   bash get-pants.sh
-   ```
+```bash
+uv sync
+```
 
-The full installation will occur the first time you run a pants command.
+That's it. You can now run any demo script with `uv run`.
 
-Pants is used because it makes managing dependencies easier, however, it does only run in [Unix/Linux environments](https://www.pantsbuild.org/stable/docs/getting-started/prerequisites).
+### Linting and type checking
 
-If you don't want to use Pants, keep in mind that it may be sufficient for you to look at the code, and adapt it to your environment.
-And, of course, you are welcome to change your copy of the repository.
+```bash
+# Lint all demo scripts
+uv run ruff check demo/
+
+# Type check all demo scripts
+uv run mypy demo/ --ignore-missing-imports
+```
+
+Or use the Makefile shortcuts:
+
+```bash
+make lint
+make check
+make all    # both lint and check
+```
 
 ## API key
 
@@ -84,36 +77,34 @@ To get the API key, login as the user to the NACC Flywheel instance.
 2. Click the avatar dropdown, and select "Profile".
 3. Under "Flywheel Access" at the bottom of the resulting page, click "Generate API Key".
 4. Choose a key name relevant to upload, set the expiration date, and create the API Key.
-5. Copy the API Key since you wont be able to access the value later.
-6. Keep the key secret  
+5. Copy the API Key since you won't be able to access the value later.
+6. Keep the key secret
 
 ### Storing your API key
 
-For this particular demo, we are storing the API key in a `.env` file.
+The demo scripts look for your API key in this order:
 
->Note: The `.gitignore` is set to ignore this file, which helps prevent the key value from being checked into the repository.
-> Take care to protect your key like any other secret in your work environment.
-> A deployment should use more robust secret management to ensure the secret is not easily accessible.
+1. **`--api-key` flag** — pass it directly on the command line
+2. **`FW_API_KEY` environment variable** — loaded automatically from a `.env` file if present
+3. **System keyring** — macOS Keychain, Windows Credential Locker, or Linux Secret Service
+4. **Interactive prompt** — if none of the above are found and you're in a terminal, you'll be prompted; the key is then stored in the system keyring for next time
 
-Run the command 
+The simplest approach for repeated use is to run a script once and enter your key when prompted. It will be saved in your OS keyring automatically.
 
-```bash
-touch .env
-```
-
-and then edit the file to add your key in a line like
+Alternatively, create a `.env` file:
 
 ```bash
-FW_API_KEY=<the value of the API key>
+echo "FW_API_KEY=<the value of the API key>" > .env
 ```
 
-> The `.env` file is included in the `.gitignore` file intentionally to prevent inclusion of the API token in a Git repository.
+> The `.gitignore` is set to ignore `.env` to prevent the key from being checked into the repository.
+> For production use, prefer the system keyring or a dedicated secret manager over plaintext files.
 
 ## Demos
 
-- [Python uploader](demo/python-uploader/README.md).
-- [R uploader](demo/r-uploader/README.md).
-- [CLI uploader](demo/fwcli/README.md).
+- [Python uploader](demo/python-uploader/README.md)
+- [R uploader](demo/r-uploader/README.md)
+- [CLI uploader](demo/fwcli/README.md)
 - [Python error puller](demo/pull_errors/README.md)
 - [Python status puller](demo/pull_status/README.md)
 - [Python identifier puller](demo/pull_identifiers/README.md)

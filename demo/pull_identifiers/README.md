@@ -2,7 +2,7 @@
 
 This example is a Python script that pulls participant identifiers from an enrollment ingest project using a NACC created dataview.
 
->Enrollment projects are associated with a particular study.
+> Enrollment projects are associated with a particular study.
 
 Follow the steps in the [top-level README](../../README.md#setting-up-demo-environment) for getting started.
 
@@ -10,18 +10,20 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 
 ## Running the demo script
 
-The demo can be run using Pants with the command
-
 ```bash
-pants run demo/pull_identifiers/src/python/pull_identifiers.py -- --adcid 0 --pipeline sandbox
+uv run demo/pull_identifiers/pull_identifiers.py --adcid 0 --pipeline sandbox
 ```
 
-which will create a file `center-identifiers-<date>.csv` in the top level directory.
-
-(The Pants run command requires `--` before any command-line parameters.)
+This will create a file `center-identifiers-<date>.csv` in the top level directory.
 
 To run for your center change the `--adcid` argument to the ADCID for your center.
 You can change the pipeline to `--pipeline ingest`.
+
+You can specify a custom output path with `--output`:
+
+```bash
+uv run demo/pull_identifiers/pull_identifiers.py --adcid 0 --output my-identifiers.csv
+```
 
 ## About Dataviews
 
