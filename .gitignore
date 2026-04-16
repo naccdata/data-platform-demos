@@ -169,3 +169,5 @@ cython_debug/
 
 # Output .csv in top-level directory
 /*.csv
+
+.kiro
