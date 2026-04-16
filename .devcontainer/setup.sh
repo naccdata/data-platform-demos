@@ -3,11 +3,14 @@ set -e
 
 echo "Setting up development environment..."
 
-# Install Pants launcher using get-pants.sh
-./get-pants.sh
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install project dependencies
+uv sync
 
 # Verify installations
 python --version
-pants --version
+uv --version
 
 echo "Development environment ready!"

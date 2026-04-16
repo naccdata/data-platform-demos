@@ -1,0 +1,27 @@
+name: Lint and Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-check:
+    name: Lint and Type Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+    - uses: actions/setup-python@v6
+      with:
+        python-version: "3.12"
+    - name: Lint
+      run: uv run ruff check demo/
+    - name: Type check
+      run: uv run mypy demo/ --ignore-missing-imports

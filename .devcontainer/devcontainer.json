@@ -17,8 +17,7 @@
         "charliermarsh.ruff",
         "ms-azuretools.vscode-docker",
         "streetsidesoftware.code-spell-checker",
-        "yzhang.markdown-all-in-one",
-        "pantsbuild.pants"
+        "yzhang.markdown-all-in-one"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/usr/local/bin/python",

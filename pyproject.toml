@@ -1,0 +1,27 @@
+[project]
+name = "data-platform-demos"
+version = "0.1.0"
+description = "Demonstration code for working with the NACC Data Platform"
+requires-python = ">=3.12"
+dependencies = [
+    "flywheel-sdk>=20.0.0",
+    "nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v3.0.0/nacc_common-3.0.0-py3-none-any.whl",
+]
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "ruff",
+]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.mypy]
+python_version = "3.12"
+warn_unused_configs = true
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = "flywheel.*"
+ignore_missing_imports = true
