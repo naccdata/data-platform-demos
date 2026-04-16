@@ -14,10 +14,16 @@ Otherwise, the code here could be adapted someone familiar with Python or R to u
    - [R script](https://github.com/naccdata/data-platform-demos/tree/main/demo/r-uploader).
    - [Shell script](https://github.com/naccdata/data-platform-demos/tree/main/demo/fwcli).
 
-2. Accessing tabular data views (Python SDK)
+2. Enrollment data
+   - [Uploading enrollment CSVs](https://github.com/naccdata/data-platform-demos/tree/main/demo/enrollment) (`enroll_upload.py`)
+   - [Pulling enrollment errors](https://github.com/naccdata/data-platform-demos/tree/main/demo/enrollment) (`enroll_errors.py`)
+
+3. Accessing tabular data views (Python SDK)
    - [Pulling upload errors](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_errors)
    - [Pulling QC status](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_status)
    - [Pulling participant identifiers](https://github.com/naccdata/data-platform-demos/tree/main/demo/pull_identifiers)
+
+The error and status scripts (`pull_errors`, `pull_status`, `enroll_errors`) support `--module` and `--ptid` flags for filtering results by module name or participant ID. See each demo's README for details.
 
 ## NACC-Common Python package
 

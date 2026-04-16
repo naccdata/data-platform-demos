@@ -105,6 +105,7 @@ echo "FW_API_KEY=<the value of the API key>" > .env
 - [Python uploader](demo/python-uploader/README.md)
 - [R uploader](demo/r-uploader/README.md)
 - [CLI uploader](demo/fwcli/README.md)
+- [Enrollment upload and errors](demo/enrollment/README.md)
 - [Python error puller](demo/pull_errors/README.md)
 - [Python status puller](demo/pull_status/README.md)
 - [Python identifier puller](demo/pull_identifiers/README.md)
