@@ -7,7 +7,7 @@ If you are looking for solutions that run on the command-line, it is possible to
 There are some tasks (pulling participant identifiers and file upload errors) that cannot be done with the CLI, but are supported by the ADRC portals.
 Otherwise, the code here could be adapted someone familiar with Python or R to use in Jupyter notebooks or command line scripts.
 
-## Demos:
+## Demos
 
 1. Uploading tabular data (e.g., form and other CSV data)
    - [Python script](https://github.com/naccdata/data-platform-demos/tree/main/demo/python-uploader).
