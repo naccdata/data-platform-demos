@@ -7,8 +7,6 @@ If uploading from disk is your scenario, you should consider using the Flywheel 
 
 You will need [Docker](https://www.docker.com) installed to be able to run this demo.
 
-> If you are running the VSCode Dev Container for the repo (see the [top-level README](../../README.md#python-environment)), then Docker is already installed.
-
 ## Configuration
 
 The R script reads the following environment variables (all have defaults):

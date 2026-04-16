@@ -8,8 +8,6 @@ You can use the CLI as a command, but this shows how the CLI could be used in a 
 
 You will need [Docker](https://www.docker.com) installed to be able to run this demo.
 
-> If you are running the VSCode Dev Container for the repo (see the [top-level README](../../README.md#python-environment)), then Docker is already installed.
-
 ## Configuration
 
 The entrypoint script reads the following environment variables (all have defaults):

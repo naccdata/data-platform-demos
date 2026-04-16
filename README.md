@@ -30,9 +30,6 @@ You will need a Python 3.12 interpreter installed.
 
 The simplest approach is to [install Python](https://www.python.org/downloads/).
 
-The repository is also set up to use a VSCode Dev Container for Python.
-Getting this going from scratch requires installing [VSCode](https://code.visualstudio.com), [Docker](https://www.docker.com) and setting up [Dev Containers](https://code.visualstudio.com/docs/devcontainers/tutorial).
-
 ### Installing uv
 
 This project uses [uv](https://docs.astral.sh/uv/) to manage Python dependencies. Install it with:
