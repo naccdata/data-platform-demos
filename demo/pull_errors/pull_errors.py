@@ -5,12 +5,12 @@ import argparse
 import logging
 import sys
 from csv import DictWriter
-from datetime import date
 from pathlib import Path
 
 # Allow importing the shared helper from demo/common/
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "common"))
 
+import filter_helpers  # noqa: E402
 from fw_auth import get_api_key  # noqa: E402
 from nacc_common.center_info import get_center_id, CenterError  # noqa: E402
 from nacc_common.error_data import ERROR_HEADER_NAMES, get_error_data  # noqa: E402
@@ -60,6 +60,7 @@ def main():
     parser.add_argument(
         "-k", "--api-key", help="Flywheel API key (default: from env or keyring)"
     )
+    filter_helpers.add_filter_args(parser)
     args = parser.parse_args()
 
     # 1. Get the API key (CLI flag > env var > keyring > prompt)
@@ -94,16 +95,31 @@ def main():
 
     log.info("Using project %s/%s", source_project.group, source_project.label)
 
-    # 5. Collect error data from project
-    table = get_error_data(source_project)
+    # 5. Collect filter sets
+    module_set = filter_helpers.collect_modules(args.module)
+    ptid_set = filter_helpers.collect_ptids(args.ptid)
+    filter_helpers.log_active_filters(module_set, ptid_set, log)
+
+    # 6. Collect error data from project
+    error_kwargs: dict[str, object] = {}
+    if module_set is not None:
+        error_kwargs["modules"] = module_set
+    table = get_error_data(source_project, **error_kwargs)  # type: ignore[arg-type]
 
     if not table:
         log.info("no errors in project %s", source_project.label)
         return
 
-    # 6. Format data
-    output_path = (
-        args.output or f"errors-{source_project.label}-{date.today()}.csv"
+    # 7. Post-filter by PTID
+    table = filter_helpers.filter_by_ptids(table, ptid_set)
+
+    if not table:
+        log.info("no errors after PTID filtering in project %s", source_project.label)
+        return
+
+    # 8. Format data
+    output_path = args.output or filter_helpers.build_output_filename(
+        "errors", source_project.label, module_set, ptid_set
     )
     with open(output_path, mode="w", encoding="utf-8") as out_file:
         writer = DictWriter(out_file, fieldnames=ERROR_HEADER_NAMES, dialect="unix")

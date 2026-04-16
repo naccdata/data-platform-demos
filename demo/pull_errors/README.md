@@ -25,6 +25,36 @@ You can specify a custom output path with `--output`:
 uv run demo/pull_errors/pull_errors.py --adcid 0 --output my-errors.csv
 ```
 
+## Filtering results
+
+You can narrow the output to specific modules and/or participant IDs using the `--module` (`-m`) and `--ptid` (`-t`) flags.
+
+Filter by a single module:
+
+```bash
+uv run demo/pull_errors/pull_errors.py --adcid 0 --module UDS
+```
+
+This retrieves errors only for the UDS module. Module names are case-insensitive (they are normalized to uppercase internally). You can specify multiple modules with commas (`--module UDS,LBD`) or by repeating the flag (`--module UDS --module LBD`).
+
+Filter by one or more participant IDs:
+
+```bash
+uv run demo/pull_errors/pull_errors.py --adcid 0 --ptid PT001,PT002
+```
+
+This retrieves errors only for participants PT001 and PT002. PTID filtering is case-sensitive.
+
+Combine both filters:
+
+```bash
+uv run demo/pull_errors/pull_errors.py --adcid 0 --module UDS --ptid PT001
+```
+
+This retrieves only UDS errors for participant PT001. Filters can be combined freely.
+
+When filters are active and no `--output` flag is provided, the output filename automatically reflects the active filters (e.g., `errors-UDS-ptid-PT001-<project-label>-<date>.csv`).
+
 ## About pulling errors
 
 NACC and Flywheel have agreed upon a standard format for error metadata that is captured when files are processed.
