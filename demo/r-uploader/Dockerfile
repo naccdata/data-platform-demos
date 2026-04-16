@@ -1,15 +1,3 @@
-FROM python:3.12 AS builder
-
-ENV BUILD_DIR=/build
-RUN mkdir ${BUILD_DIR}
-WORKDIR ${BUILD_DIR}
-
-COPY requirements.txt .
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /build/wheels -r requirements.txt
-
-COPY nacc_common-*-py3-none-any.whl ./wheels
-
-###
 FROM python:3.12-slim
 
 # hadolint ignore=DL3008
@@ -23,13 +11,12 @@ ENV SCRIPT_DIR=/script
 RUN mkdir ${SCRIPT_DIR}
 WORKDIR ${SCRIPT_DIR}
 
-COPY --from=builder /build/wheels /wheels
-COPY --from=builder /build/requirements.txt .
-
-RUN pip install --no-cache-dir /wheels/* \
+# Install Python dependencies and R reticulate package
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt \
  && R -e "install.packages(c('reticulate'))"
 
-COPY demo/r-uploader/src/r/uploader/uploader.R .
+COPY demo/r-uploader/uploader.R .
 
 ENTRYPOINT [ "R", "-e", "source('/script/uploader.R')" ]
 
