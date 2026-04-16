@@ -28,13 +28,13 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 
 > All the commands need to be run with the top-level directory of the repository as the working directory.
 
-1. First, build the Docker image with
+1. Build the Docker image:
 
    ```bash
-   pants package demo/r-uploader/src/docker::
+   docker build -f demo/r-uploader/Dockerfile -t naccdata/r-uploader .
    ```
 
-2. Second, run the example using the command
+2. Run the example:
 
    ```bash
    docker run --volume "./data":/wd --env-file .env naccdata/r-uploader

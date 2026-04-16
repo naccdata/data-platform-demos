@@ -8,20 +8,22 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 
 ## Running the demo script
 
-The demo can be run using Pants with the command
-
 ```bash
-pants run demo/pull_status/src/python/pull_status.py -- --adcid 0 --datatype enrollment --pipeline sandbox
+uv run demo/pull_status/pull_status.py --adcid 0 --datatype enrollment --pipeline sandbox
 ```
 
-which will create a file `qc-status-<project-label>-<date>.csv` in the top level directory.
-
-(The Pants run command requires `--` before any command-line parameters.)
+This will create a file `qc-status-<project-label>-<date>.csv` in the top level directory.
 
 To run for your center change the `--adcid` argument to the ADCID for your center.
 
 To submit enrollment data, use `--datatype enrollment`.
 And, to submit actual data set `--pipeline ingest`.
+
+You can specify a custom output path with `--output`:
+
+```bash
+uv run demo/pull_status/pull_status.py --adcid 0 --output my-status.csv
+```
 
 ## About pulling QC status
 

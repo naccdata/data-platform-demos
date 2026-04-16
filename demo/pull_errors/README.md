@@ -1,6 +1,6 @@
 # Pulling pipeline file errors
 
-This example is a Python script that uses the `error_data.get_error_data` function from `nacc-common` package to pull error data from a pipeline project.
+This example is a Python script that uses the `error_data.get_error_data` function from the `nacc-common` package to pull error data from a pipeline project.
 
 Follow the steps in the [top-level README](../../README.md#setting-up-demo-environment) for getting started.
 
@@ -8,20 +8,22 @@ Follow the steps in the [top-level README](../../README.md#setting-up-demo-envir
 
 ## Running the demo script
 
-The demo can be run using Pants with the command
-
 ```bash
-pants run demo/pull_errors/src/python/pull_errors.py -- --adcid 0 --datatype enrollment --pipeline sandbox
+uv run demo/pull_errors/pull_errors.py --adcid 0 --datatype enrollment --pipeline sandbox
 ```
 
-which will create a file `errors-sandbox-enrollment-<date>.csv` in the top level directory.
-
-(The Pants run command requires `--` before any command-line parameters.)
+This will create a file `errors-<project-label>-<date>.csv` in the top level directory.
 
 To run for your center change the `--adcid` argument to the ADCID for your center.
 
 To submit enrollment data, use `--datatype enrollment`.
 And, to submit actual data set `--pipeline ingest`.
+
+You can specify a custom output path with `--output`:
+
+```bash
+uv run demo/pull_errors/pull_errors.py --adcid 0 --output my-errors.csv
+```
 
 ## About pulling errors
 

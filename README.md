@@ -20,25 +20,7 @@ Otherwise, the code here could be adapted to use in Jupyter notebooks or command
 
 Please ask for help if something is unclear.
 
-## Table of Contents
-
-- [Data Platform Demonstration Code](#data-platform-demonstration-code)
-  - [Reporting issues](#reporting-issues)
-  - [About the demos](#about-the-demos)
-  - [Table of Contents](#table-of-contents)
-  - [Setting up demo environment](#setting-up-demo-environment)
-    - [Python environment](#python-environment)
-    - [Using Pants](#using-pants)
-  - [API key](#api-key)
-    - [Finding your API key](#finding-your-api-key)
-    - [Storing your API key](#storing-your-api-key)
-  - [Demos](#demos)
-
 ## Setting up demo environment
-
-> This demo uses the [Pants build system](pantsbuild.org), and assumes a Unix/Linux environment.
-> Windows can use [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
-> See the [pants requirements](https://www.pantsbuild.org/2.21/docs/getting-started/prerequisites).
 
 You'll first need to [clone this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to your computer using Git.
 
@@ -46,30 +28,44 @@ You'll first need to [clone this repository](https://docs.github.com/en/reposito
 
 You will need a Python 3.12 interpreter installed.
 
-The simplest approach may to be to [install Python](https://www.python.org/downloads/).
+The simplest approach is to [install Python](https://www.python.org/downloads/).
 
-But, the repository is setup to use a VSCode Dev Container for Python.
+The repository is also set up to use a VSCode Dev Container for Python.
 Getting this going from scratch requires installing [VSCode](https://code.visualstudio.com), [Docker](https://www.docker.com) and setting up [Dev Containers](https://code.visualstudio.com/docs/devcontainers/tutorial).
-This approach is not suggested unless you want to use the same environment we are using.
 
-Incidentally, when you open the repository with VSCode, it will prompt you to install and run the Dev Containers extension, which will in turn prompt you to install [Docker](https://www.docker.com).
-After Docker is installed you will have to start the Docker Desktop from your operating system.
-Once Docker is started, in VSCode click the green bar at the bottom left and choose "Reopen in Container".
+### Installing uv
 
-### Using Pants
+This project uses [uv](https://docs.astral.sh/uv/) to manage Python dependencies. Install it with:
 
-Once you have a Python 3.12 environment, install the [Pants build system](pantsbuild.org) by running the command
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-   ```bash
-   bash get-pants.sh
-   ```
+Then install the project dependencies:
 
-The full installation will occur the first time you run a pants command.
+```bash
+uv sync
+```
 
-Pants is used because it makes managing dependencies easier, however, it does only run in [Unix/Linux environments](https://www.pantsbuild.org/stable/docs/getting-started/prerequisites).
+That's it. You can now run any demo script with `uv run`.
 
-If you don't want to use Pants, keep in mind that it may be sufficient for you to look at the code, and adapt it to your environment.
-And, of course, you are welcome to change your copy of the repository.
+### Linting and type checking
+
+```bash
+# Lint all demo scripts
+uv run ruff check demo/
+
+# Type check all demo scripts
+uv run mypy demo/ --ignore-missing-imports
+```
+
+Or use the Makefile shortcuts:
+
+```bash
+make lint
+make check
+make all    # both lint and check
+```
 
 ## API key
 
@@ -84,14 +80,14 @@ To get the API key, login as the user to the NACC Flywheel instance.
 2. Click the avatar dropdown, and select "Profile".
 3. Under "Flywheel Access" at the bottom of the resulting page, click "Generate API Key".
 4. Choose a key name relevant to upload, set the expiration date, and create the API Key.
-5. Copy the API Key since you wont be able to access the value later.
+5. Copy the API Key since you won't be able to access the value later.
 6. Keep the key secret
 
 ### Storing your API key
 
 For this particular demo, we are storing the API key in a `.env` file.
 
->Note: The `.gitignore` is set to ignore this file, which helps prevent the key value from being checked into the repository.
+> Note: The `.gitignore` is set to ignore this file, which helps prevent the key value from being checked into the repository.
 > Take care to protect your key like any other secret in your work environment.
 > A deployment should use more robust secret management to ensure the secret is not easily accessible.
 
