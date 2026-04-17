@@ -30,16 +30,16 @@ The error and status scripts (`pull_errors`, `pull_status`, `enroll_errors`) sup
 These demos use the [`nacc-common`](https://github.com/naccdata/flywheel-gear-extensions/tree/main/nacc-common) Python package which defines utilities that can be used in scripts accessing center data in Flywheel.
 Using these functions can help you avoid situations where data organization might be changed.
 
-Distributions can be accessed via each [release](https://github.com/naccdata/nacc-common/releases) on GitHub.
+Distributions can be accessed via each [release](https://github.com/naccdata/flywheel-gear-extensions/releases) on GitHub.
 
 You can use the release directly by referencing the release files in your package manager.
 For instance, adding the following line to `requirements.txt` for use with pip
 
 ```text
-nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v3.0.0/nacc_common-3.0.0-py3-none-any.whl
+nacc-common@ https://github.com/naccdata/flywheel-gear-extensions/releases/download/nacc-common%2Fv3.1.0/nacc_common-3.1.0-py3-none-any.whl
 ```
 
-will include the 3.0.0 release of the package (as a wheel distribution) as a dependency.
+will include the 3.1.0 release of the package (as a wheel distribution) as a dependency.
 The format of the URL stays consistent, so to use a newer version of the package replace the version number.
 
 > Older releases of this package in the [demo repository](https://github.com/naccdata/data-platform-demos) likely will not work with updates to the data in the NACC Data Platform.

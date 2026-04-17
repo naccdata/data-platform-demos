@@ -6,7 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     "flywheel-sdk>=20.0.0",
     "keyring>=25.0.0",
-    "nacc-common@ https://github.com/naccdata/nacc-common/releases/download/v3.0.0/nacc_common-3.0.0-py3-none-any.whl",
+    "nacc-common@ https://github.com/naccdata/flywheel-gear-extensions/releases/download/nacc-common%2Fv3.1.0/nacc_common-3.1.0-py3-none-any.whl",
     "python-dotenv>=1.0.0",
 ]
 

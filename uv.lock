@@ -206,7 +206,7 @@ dev = [
 requires-dist = [
     { name = "flywheel-sdk", specifier = ">=20.0.0" },
     { name = "keyring", specifier = ">=25.0.0" },
-    { name = "nacc-common", url = "https://github.com/naccdata/nacc-common/releases/download/v3.0.0/nacc_common-3.0.0-py3-none-any.whl" },
+    { name = "nacc-common", url = "https://github.com/naccdata/flywheel-gear-extensions/releases/download/nacc-common%2Fv3.1.0/nacc_common-3.1.0-py3-none-any.whl" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
 ]
 
@@ -447,8 +447,8 @@ wheels = [
 
 [[package]]
 name = "nacc-common"
-version = "3.0.0"
-source = { url = "https://github.com/naccdata/nacc-common/releases/download/v3.0.0/nacc_common-3.0.0-py3-none-any.whl" }
+version = "3.1.0"
+source = { url = "https://github.com/naccdata/flywheel-gear-extensions/releases/download/nacc-common%2Fv3.1.0/nacc_common-3.1.0-py3-none-any.whl" }
 dependencies = [
     { name = "flywheel-sdk" },
     { name = "pydantic" },
@@ -456,7 +456,7 @@ dependencies = [
     { name = "typing-extensions" },
 ]
 wheels = [
-    { url = "https://github.com/naccdata/nacc-common/releases/download/v3.0.0/nacc_common-3.0.0-py3-none-any.whl", hash = "sha256:60ada61937c6555ed1e066d10a49d73065c66e9cfa889434b88d28443cb81515" },
+    { url = "https://github.com/naccdata/flywheel-gear-extensions/releases/download/nacc-common%2Fv3.1.0/nacc_common-3.1.0-py3-none-any.whl", hash = "sha256:bc7c749374e47dd5c3057ebef17c6962b9b984682b86a33d72a791e4fa9bde43" },
 ]
 
 [package.metadata]
