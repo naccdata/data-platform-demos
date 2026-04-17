@@ -98,19 +98,18 @@ def main():
     filter_helpers.log_active_filters(module_set, ptid_set, log)
 
     # 6. Get QC status from project
+    status_kwargs: dict[str, object] = {}
     if module_set is not None:
-        table = get_status_data(source_project, modules=module_set)
-    else:
-        table = get_status_data(source_project)
+        status_kwargs["modules"] = module_set
+    if ptid_set is not None:
+        status_kwargs["ptids"] = ptid_set
+    table = get_status_data(source_project, **status_kwargs)  # type: ignore[arg-type]
 
     if not table:
         log.info("no status data in project %s", source_project.label)
         return
 
-    # 7. Post-filter by PTID
-    table = filter_helpers.filter_by_ptids(table, ptid_set)
-
-    # 8. Format data
+    # 7. Format data
     output_path = args.output or filter_helpers.build_output_filename(
         "qc-status", source_project.label, module_set, ptid_set
     )

@@ -104,20 +104,15 @@ def main():
     error_kwargs: dict[str, object] = {}
     if module_set is not None:
         error_kwargs["modules"] = module_set
+    if ptid_set is not None:
+        error_kwargs["ptids"] = ptid_set
     table = get_error_data(source_project, **error_kwargs)  # type: ignore[arg-type]
 
     if not table:
         log.info("no errors in project %s", source_project.label)
         return
 
-    # 7. Post-filter by PTID
-    table = filter_helpers.filter_by_ptids(table, ptid_set)
-
-    if not table:
-        log.info("no errors after PTID filtering in project %s", source_project.label)
-        return
-
-    # 8. Format data
+    # 7. Format data
     output_path = args.output or filter_helpers.build_output_filename(
         "errors", source_project.label, module_set, ptid_set
     )
