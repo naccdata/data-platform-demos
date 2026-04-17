@@ -32,7 +32,7 @@ demo/<name>/
 ## Key Dependencies
 
 - **flywheel-sdk** (>=20.0.0) — Flywheel API client
-- **nacc-common** (v3.0.0) — NACC utility library for center/pipeline lookups, installed from GitHub release wheel
+- **nacc-common** (v3.1.0) — NACC utility library for center/pipeline lookups, installed from GitHub release wheel
 - **keyring** (>=25.0.0) — OS keyring integration for API key storage
 - **python-dotenv** (>=1.0.0) — Auto-loads `.env` files
 - Dependencies are declared in `pyproject.toml` and locked via `uv.lock`

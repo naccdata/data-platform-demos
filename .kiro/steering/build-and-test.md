@@ -74,5 +74,6 @@ make build-r-uploader
 GitHub Actions (`.github/workflows/ci.yml`) runs on pushes to `main` and PRs:
 1. `uv run ruff check demo/` — linting
 2. `uv run mypy demo/ --ignore-missing-imports` — type checking
+3. `uv run pytest tests/ -v` — tests
 
 The workflow uses `astral-sh/setup-uv` for fast uv installation.
