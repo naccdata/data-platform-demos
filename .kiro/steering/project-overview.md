@@ -5,7 +5,7 @@ description: NACC Data Platform demos repository structure, dependencies, and en
 
 # Project Overview
 
-This repository contains demonstration code for the **NACC Data Platform**, which is built on top of the Flywheel data management system. The demos show how to programmatically upload data, pull errors, pull QC status, and pull participant identifiers.
+This repository contains demonstration code for the **NACC Data Platform**, which is built on top of the Flywheel data management system. The demos show how to programmatically upload data, pull errors, pull QC status, list submissions, view submission details, and pull participant identifiers.
 
 ## Repository Structure
 
@@ -17,6 +17,8 @@ The repo uses [uv](https://docs.astral.sh/uv/) for dependency management with a 
 - `demo/pull_errors/` — Python script to pull file upload errors (supports `--module` and `--ptid` filtering)
 - `demo/pull_status/` — Python script to pull QC status (supports `--module` and `--ptid` filtering)
 - `demo/pull_identifiers/` — Python script to pull participant identifiers
+- `demo/list_submissions/` — Python script to list submissions and their overall QC status
+- `demo/submission_detail/` — Python script to view per-stage QC details for a specific submission
 - `demo/enrollment/` — Python scripts for enrollment CSV upload and enrollment error retrieval
 - `demo/common/` — Shared helper modules (`fw_auth.py` for API key resolution, `filter_helpers.py` for `--module`/`--ptid` CLI filtering)
 

@@ -19,7 +19,7 @@ Follow the conventions established in the existing demo scripts:
 - **CLI arguments:** Use `argparse` for command-line interfaces. Include `-k`/`--api-key` for the Flywheel API key.
 - **API key resolution:** Use the shared `demo/common/fw_auth.py` helper (`get_api_key()`). Never hardcode credentials. The helper checks: CLI flag > env var (`.env` auto-loaded) > OS keyring > interactive prompt.
 - **Error handling:** Use `sys.exit(1)` for fatal errors in scripts. Log errors before exiting.
-- **Imports:** Use `nacc_common` utilities (`get_center_id`, `get_project`) for Flywheel center/pipeline lookups rather than hardcoding IDs. Import `fw_auth` via the `sys.path` pattern used in existing scripts.
+- **Imports:** Use `nacc_common` utilities (`get_center_id`, `get_project`, `list_submissions`, `get_error_data`, `get_status_data`) for Flywheel center/pipeline lookups and QC data retrieval rather than hardcoding IDs or parsing platform internals. Import `fw_auth` via the `sys.path` pattern used in existing scripts.
 
 ## Shell Scripts
 
